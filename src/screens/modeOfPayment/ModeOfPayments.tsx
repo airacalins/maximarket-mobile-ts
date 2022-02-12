@@ -1,21 +1,46 @@
-import React from 'react';
-import { View } from 'react-native';
-import ModeOfPaymentItem from '../../components/item/ModeOfPaymentItem';
+import React, { useEffect } from 'react';
+import { FlatList, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 
-import colors from '../../styles/colors';
+import ModeOfPaymentItem from '../../components/item/ModeOfPaymentItem';
+import LoadingScreen from '../../components/indicator/LoadingScreen';
+import { fetchModeOfPaymentsAsync } from '../../reducers/modeOfPaymentSlice';
+import { useAppSelecter } from '../../store/configureStore';
+
 import { styles } from '../../styles/styles';
+import NoData from '../../components/indicator/NoData';
+
 
 const ModeOfPaymentsScreen = () => {
-    const { bg_light, container, p_10 } = styles
+    const { bg_light, container, p_10, separator } = styles
+
+    const { modeOfPayments, isFetchingModeOfPayments } = useAppSelecter(state => state.modeOfPayment);
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchModeOfPaymentsAsync());
+    }, [])
+
+    if (isFetchingModeOfPayments) return <LoadingScreen />
+
+    if (!modeOfPayments) return <NoData />
 
     return (
         <View style={container}>
             <View style={[bg_light, p_10]}>
-                <ModeOfPaymentItem bankName='BDOd' accountName='BDO' accountNumber='BDO' />
-                <ModeOfPaymentItem bankName='BDO' accountName='BDO' accountNumber='BDO' />
-                <ModeOfPaymentItem bankName='BDO' accountName='BDO' accountNumber='BDO' />
+
+                <FlatList
+                    data={modeOfPayments}
+                    keyExtractor={(modeOfPayment) => modeOfPayment.id}
+                    renderItem={({ item }) =>
+                        <ModeOfPaymentItem bankName={item.bankName} accountName={item.accountName} accountNumber={item.accountNumber} />
+                    }
+                    ItemSeparatorComponent={() => <View style={separator} />}
+                />
+
             </View>
         </View>
+
     );
 }
 

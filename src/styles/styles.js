@@ -23,6 +23,10 @@ export const styles = StyleSheet.create({
         marginTop: Constants.statusBarHeight + 15,
     },
 
+    flex_1: {
+        flex: 1
+    },
+
     icon_circle_xs: {
         alignItems: 'center',
         borderRadius: 12.5,
@@ -38,10 +42,17 @@ export const styles = StyleSheet.create({
         width: 35,
     },
 
-    row: { display: 'flex', flexDirection: 'row' },
-    row_center: { alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'center' },
-    row_center_x: { alignItems: 'center', display: 'flex', flexDirection: 'row' },
-    row_center_y: { alignItems: 'center', display: 'flex', justifyContent: 'center' },
+    m_5: { margin: 5 },
+    m_15: { margin: 15 },
+    mb_5: { marginBottom: 5 },
+    mb_10: { marginBottom: 10 },
+    mb_15: { marginBottom: 15 },
+    me_5: { marginRight: 5 },
+    me_8: { marginRight: 8 },
+    me_10: { marginRight: 10 },
+    my_5: { marginVertical: 5 },
+    my_10: { marginVertical: 10 },
+    my_15: { marginVertical: 15 },
 
     p_5: { padding: 5 },
     p_10: { padding: 10 },
@@ -52,16 +63,12 @@ export const styles = StyleSheet.create({
     py_15: { paddingVertical: 15 },
     py_25: { paddingVertical: 25 },
 
-    m_5: { margin: 5 },
-    mb_5: { marginBottom: 5 },
-    mb_10: { marginBottom: 10 },
-    mb_15: { marginBottom: 15 },
-    me_5: { marginRight: 5 },
-    me_8: { marginRight: 8 },
-    me_10: { marginRight: 10 },
-    my_5: { marginVertical: 5 },
-    my_10: { marginVertical: 10 },
-    my_15: { marginVertical: 15 },
+    row: { display: 'flex', flexDirection: 'row' },
+    row_center: { alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'center' },
+    row_center_x: { alignItems: 'center', display: 'flex', flexDirection: 'row' },
+    row_center_y: { alignItems: 'center', display: 'flex', justifyContent: 'center' },
+
+    separator: { borderWidth: 0.5, borderColor: colors.secondary },
 
     w_20: { width: 20 },
     w_25: { width: 25 },

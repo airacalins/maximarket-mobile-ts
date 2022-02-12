@@ -4,8 +4,11 @@ import AuthNavigator from './src/navigations/AuthNavigator';
 import BottomTabNavigator from './src/navigations/BottomTabNavigator';
 import HomeNavigator from './src/navigations/BottomTabNavigator';
 import LoginFormScreen from './src/screens/account/LoginFormScreen';
+import { Provider, useSelector } from 'react-redux';
+import { store } from './src/store/configureStore';
 
-export default function App() {
+
+function App() {
   return (
     <NavigationContainer>
       <BottomTabNavigator />
@@ -14,3 +17,10 @@ export default function App() {
   );
 }
 
+export default () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
+};

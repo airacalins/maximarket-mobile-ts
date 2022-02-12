@@ -1,25 +1,40 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-const Tab = createBottomTabNavigator();
-
 import React from 'react';
-import MenuNavigator from './MenuNavigator';
-import DashboardNavigator from './DashboardNavigator';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import routes from './routes';
 
-const HomeNavigator = () => {
-    return (
-        <Tab.Navigator>
-            <Tab.Screen
-                name="HomeNavigator"
-                component={DashboardNavigator}
-            />
+import AnnouncementNavigator from './PaymentNavigator';
+import HomeScreen from '../screens/account/HomeScreen';
+import InvoiceNavigator from './InvoiceNavigator';
+import PaymentNavigator from './PaymentNavigator';
 
-            <Tab.Screen
-                name="MenuNavigator"
-                component={MenuNavigator}
-            />
-        </Tab.Navigator>
-    );
-}
+const Stack = createNativeStackNavigator();
+
+const HomeNavigator = () => (
+    <Stack.Navigator>
+        <Stack.Screen
+            name={routes.HOME}
+            component={HomeScreen}
+            options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+            name="AnnouncementNavigator"
+            component={AnnouncementNavigator}
+            options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+            name="InvoicesNavigator"
+            component={InvoiceNavigator}
+            options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+            name="PaymentsNavigator"
+            component={PaymentNavigator}
+            options={{ headerShown: false }}
+        />
+    </Stack.Navigator>
+);
 
 export default HomeNavigator;

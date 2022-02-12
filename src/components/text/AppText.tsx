@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import colors from '../../styles/colors';
 
 interface Props {
-    as: string,
+    as?: string,
     bold?: boolean,
     children: React.ReactNode,
     color?: string
@@ -47,7 +47,7 @@ const AppText: React.FC<Props> = ({ as, bold, children, color, italic }) => {
                 fontSize: fontSize,
                 fontWeight: fontWeight,
                 fontStyle: fontStyle,
-                paddingVertical: 2.5,
+                paddingVertical: 1,
             }}
         >
             {children}

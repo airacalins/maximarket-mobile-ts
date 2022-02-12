@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { ImageBackground, Keyboard, ToastAndroid, View } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import colors from '../../styles/colors';
 import { styles } from '../../styles/styles';
-import { useAppSelecter } from '../../store/configureStore';
+import { useAppDispatch, useAppSelecter } from '../../store/configureStore';
 import { fetchTenantDetailsAsync } from '../../reducers/tenantSlice';
 import AppButton from '../../components/button/AppButton';
 import AppText from '../../components/text/AppText';
@@ -21,7 +20,7 @@ interface Props {
 const LoginFormScreen: React.FC<Props> = ({ navigation }) => {
 
     const { tenant, isFetchingTenantDetails, errorMessage } = useAppSelecter((state) => state.tenant)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (!!errorMessage) {

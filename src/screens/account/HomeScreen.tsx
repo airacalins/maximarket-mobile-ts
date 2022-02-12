@@ -15,15 +15,15 @@ interface Props {
 }
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
-    const { tenant, isFetchingTenantDetails, errorMessage } = useAppSelecter((state) => state.tenant)
+    const { tenant } = useAppSelecter((state) => state.tenant)
 
     useEffect(() => {
         if (!tenant) navigation.navigate("AuthNavigator")
     }, [tenant])
 
     const { firstName, tenantUniqueId } = tenant!;
-    const { bg_dark, bg_light, bg_secondary, center_x, container_full, icon_circle_xs, mb_10, me_8, my_5, my_15, p_15, pb_15, px_15, py_25, rounded, row, row_center_x, row_center_x_between, w_30, w_50p } = styles;
-    const { darkGrey, light, primary } = colors;
+    const { bg_dark, bg_light, bg_secondary, center_x, container_full, icon_circle_xs, mb_10, me_8, my_5, my_15, pb_15, px_15, py_25, rounded, row, row_center_x, row_center_x_between, w_50p } = styles;
+    const { darkGrey, light } = colors;
 
     return (
 

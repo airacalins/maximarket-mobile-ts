@@ -1,101 +1,83 @@
-// import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-// import agent from "../../app/api/agent";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import agent from "../api/agent";
+import { IInvoice } from "../components/models/Invoice";
 
-// const initialState = {
-//     invoices: [],
-//     isFetching: false,
-//     invoice: undefined,
-//     isFetchingDetails: false,
-//     payment: undefined,
-//     payments: [],
-//     paymentReference: undefined
-// }
+export interface IInvoiceState {
+  invoices: IInvoice[];
+  invoice?: IInvoice;
+  isFetchingInvoices: boolean;
+  isFetchingInvoiceDetails: boolean;
+  isSaving: boolean;
+  isError: boolean;
+}
 
-// export const fetchInvoicesAsync = createAsyncThunk('invoice/fetchInvoicessAsync', async (id, thunkAPI) => {
-//     try {
-//         return await agent.Invoice.list(id);
-//     } catch (error) {
-//         return thunkAPI.rejectWithValue({ error: error.data })
-//     }
-// })
+const initialState: IInvoiceState = {
+  invoices: [],
+  isFetchingInvoices: false,
+  invoice: undefined,
+  isFetchingInvoiceDetails: false,
+  isSaving: false,
+  isError: false
+}
 
-// export const fetchInvoiceDetailsAsync = createAsyncThunk('invoice/fetchInvoiceDetailsAsync', async (id, thunkAPI) => {
-//     try {
-//         return await agent.Invoice.details(id);
-//     } catch (error) {
-//         return thunkAPI.rejectWithValue({ error: error.data })
-//     }
-// })
+export const fetchInvoicesAsync = createAsyncThunk<IInvoice[], string>(
+  'invoice/fetchInvoicessAsync',
+  async (id, thunkAPI) => {
+    try {
+      return await agent.Invoice.list(id);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({error: error.data})
+    }
+  }
+)
 
-// export const createInvoiceAsync = createAsyncThunk("invoices/createInvoiceAsync", async (payment, thunkAPI) => {
-//     try {
+export const fetchInvoiceDetailsAsync = createAsyncThunk<IInvoice, string>(
+  'invoice/fetchInvoiceDetailsAsync',
+  async (id, thunkAPI) => {
+    try {
+      return await agent.Invoice.details(id);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({error: error.data})
+    }
+  }
+)
 
-//         const bodyFormData = new FormData();
-//         bodyFormData.append('invoiceId', payment.invoiceId);
-//         bodyFormData.append('file', payment.file);
-//         bodyFormData.append('modeOfPaymentId', payment.modeOfPaymentId);
-//         bodyFormData.append('amount', payment.amount);
-//         return await agent.Invoice.create(bodyFormData);
-//     } catch (error) {
-//         return thunkAPI.rejectWithValue({ error: error.data })
-//     }
-// })
+export const invoiceSlice = createSlice({
+  name: 'invoice',
+  initialState,
+  reducers: {},
 
+  extraReducers: (builder => {
 
-// export const invoiceSlice = createSlice({
-//     name: 'invoice',
-//     initialState,
-//     reducers: {
-//         setInvoiceDetails(state, action) {
-//             state.invoice = state.invoices.find(i => i.id === action.payload);
-//         },
-//         setPaymentDetails(state, action) {
-//             state.payment = action.payload;
-//         },
-//         resetPaymentRefence(state, action) {
-//             state.paymentReference = undefined;
-//         },
-//     },
+    builder.addCase(fetchInvoicesAsync.pending, (state, action) => {
+        state.isError = false;
+        state.isFetchingInvoices = true;
+    });
+    builder.addCase(fetchInvoicesAsync.fulfilled, (state, action) => {
+        state.invoices = action.payload;
+        state.isError = false;
+        state.isFetchingInvoices = false;
+    });
+    builder.addCase(fetchInvoicesAsync.rejected, (state, action) => {
+        state.isError = true;
+        state.isFetchingInvoices = false;
+    });
 
-//     extraReducers: (builder => {
-//         builder.addCase(fetchInvoicesAsync.pending, (state, action) => {
-//             state.isFetching = true;
-//         });
-//         builder.addCase(fetchInvoicesAsync.fulfilled, (state, action) => {
-//             state.invoices = action.payload;
-//             const invoicePayments = action.payload.map(i => !!i.payments ? i.payments : []);
-//             state.payments = invoicePayments.flat(1);
-//             state.isFetching = false;
-//         });
-//         builder.addCase(fetchInvoicesAsync.rejected, (state, action) => {
-//             state.isFetching = false;
-//         });
+    
+    builder.addCase(fetchInvoiceDetailsAsync.pending, (state, action) => {
+        state.isError = false;
+        state.isFetchingInvoiceDetails = true;
+    });
+    builder.addCase(fetchInvoiceDetailsAsync.fulfilled, (state, action) => {
+        state.invoice = action.payload;
+        state.isError = false;
+        state.isFetchingInvoiceDetails = false;
+    });
+    builder.addCase(fetchInvoiceDetailsAsync.rejected, (state, action) => {
+        state.isError = true;
+        state.isFetchingInvoiceDetails = false;
+    });
+  })
+})
 
-
-//         builder.addCase(fetchInvoiceDetailsAsync.pending, (state, action) => {
-//             state.isFetchingDetails = true;
-//         });
-//         builder.addCase(fetchInvoiceDetailsAsync.fulfilled, (state, action) => {
-//             state.invoice = action.payload;
-//             state.isFetchingDetails = false;
-//         });
-//         builder.addCase(fetchInvoiceDetailsAsync.rejected, (state, action) => {
-//             state.isFetchingDetails = false;
-//         });
-
-
-//         builder.addCase(createInvoiceAsync.pending, (state, action) => {
-//             state.isSaving = true;
-//         });
-//         builder.addCase(createInvoiceAsync.fulfilled, (state, action) => {
-//             state.isSaving = false;
-//             state.paymentReference = action.payload;
-//         });
-//         builder.addCase(createInvoiceAsync.rejected, (state, action) => {
-//             state.isSaving = false;
-//         });
-
-//     })
-// })
-
-// export const { setInvoiceDetails, setPaymentDetails, resetPaymentRefence } = invoiceSlice.actions;
+export const {  } = invoiceSlice.actions;

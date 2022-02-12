@@ -11,7 +11,6 @@ import AppText from '../../components/text/AppText';
 import LoadingScreen from '../../components/indicator/LoadingScreen';
 import NoData from '../../components/indicator/NoData';
 
-
 interface Props {
     navigation: any
 }
@@ -46,7 +45,6 @@ const AnnouncementsScreen: React.FC<Props> = ({ navigation }) => {
                 data={announcements}
                 keyExtractor={(a) => a.id}
                 renderItem={({ item }) =>
-                    // <TouchableOpacity onPress={() => navigation.navigate(routes.ANNOUNCEMENT_DETAILS, { announcementId: item.id })}>
                     <TouchableOpacity onPress={() => handleAnnouncementDetails(item.id)}>
                         <View style={[bg_light, my_5, p_15, rounded,]}>
                             <AppText as='h4' bold>{item.title}</AppText>

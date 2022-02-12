@@ -7,7 +7,7 @@ interface Props {
     bold?: boolean,
     children: React.ReactNode,
     color?: string
-    italic?: string
+    italic?: boolean
 }
 
 const AppText: React.FC<Props> = ({ as, bold, children, color, italic }) => {

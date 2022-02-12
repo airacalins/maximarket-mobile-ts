@@ -1,45 +1,96 @@
-import React from 'react';
-import { Button, ImageBackground, StyleSheet, Text, View } from 'react-native';
-import AppButton from '../../components/button/AppButton';
-import FormTextInput from '../../components/input/FormTextInput';
-import AppText from '../../components/text/AppText';
-import colors from '../../styles/colors';
+import React, { useEffect, useState } from 'react';
+import { ImageBackground, Keyboard, ToastAndroid, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { useAppSelecter } from '../../store/configureStore';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Yup from 'yup';
 
-const LoginFormScreen = () => {
+
+import { styles } from '../../styles/styles';
+import colors from '../../styles/colors';
+import AppButton from '../../components/button/AppButton';
+import AppText from '../../components/text/AppText';
+import FormTextInput from '../../components/input/FormTextInput';
+import routes from '../../navigations/routes';
+import { Formik } from 'formik';
+import { fetchTenantDetailsAsync } from '../../reducers/tenantSlice';
+import LoadingScreen from '../../components/indicator/LoadingScreen';
+
+interface Props {
+    navigation: any
+}
+
+const LoginFormScreen: React.FC<Props> = ({ navigation }) => {
+
+    const { tenant, isFetchingTenantDetails, errorMessage } = useAppSelecter((state) => state.tenant)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (!!errorMessage) {
+            ToastAndroid.show(errorMessage, ToastAndroid.SHORT);
+        };
+    }, [errorMessage])
+
+    useEffect(() => {
+        if (!!tenant) navigation.navigate("HomeNavigator")
+    }, [tenant])
+
+    const validationSchema = Yup.object({
+        accountNumber: Yup.string().required("Account Number is required.")
+    })
+
+    const onSubmit = async (values: any) => {
+        await dispatch(fetchTenantDetailsAsync(values.accountNumber));
+        Keyboard.dismiss()
+    }
+
+    const { bg_darken, centered, flex_1, p_15, row_center, w_100p } = styles
+
+    if (isFetchingTenantDetails) return <LoadingScreen />
+
     return (
         <ImageBackground resizeMode="cover" source={require('../../../assets/images/login-bg.jpg')} style={{ height: '100%', width: '100%' }}>
-            <View style={styles.container}>
+            <View style={[flex_1, bg_darken]}>
 
-                <View style={styles.title}>
+                <View style={[flex_1, row_center]}>
                     <AppText as="title" color={colors.light}>Maximarket</AppText>
                 </View>
 
-                <View style={styles.formContainer}>
-                    <FormTextInput placeholder='Enter Account Number' />
-                    <AppButton onPress={() => console.log("Pressed")} title='Submit' />
+                <View style={[centered, flex_1, p_15, w_100p]}>
+                    <Formik
+                        initialValues={{ accountNumber: '' }}
+                        onSubmit={values => onSubmit(values)}
+                        validationSchema={validationSchema}
+                    >
+                        {
+                            ({ handleChange, handleSubmit, setFieldTouched, errors, touched }) => (
+                                <>
+                                    <FormTextInput
+                                        icon={<MaterialCommunityIcons name="clipboard-account" size={18} color={colors.primary} />}
+                                        onBlur={() => setFieldTouched('accountNumber')}
+                                        onChangeText={handleChange('accountNumber')}
+                                        placeholder='Enter Account Number'
+                                        errorMessage={touched && errors.accountNumber}
+                                    />
+                                    <AppButton onPress={handleSubmit} title='Submit' />
+                                </>
+                            )
+                        }
+                    </Formik>
+
+
+
                 </View>
             </View>
-        </ImageBackground>
+        </ImageBackground >
 
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "rgba(0,0,0,0.5)",
-        flex: 1,
-    },
-    title: {
-        alignItems: "center",
-        flex: 1,
-        justifyContent: "center",
-    },
-    formContainer: {
-        alignItems: "center",
-        flex: 1,
-        justifyContent: "center",
-    }
-
-})
+{/* <FormTextInput
+    icon={<MaterialCommunityIcons name="clipboard-account" size={18} color={colors.primary} />}
+    placeholder='Enter Account Number'
+/>
+<AppButton onPress={() => console.log("Pressed")} title='Submit' /> */}
 
 export default LoginFormScreen;

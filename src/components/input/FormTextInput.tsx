@@ -6,15 +6,19 @@ import { styles } from '../../styles/styles';
 import AppText from '../text/AppText';
 
 interface Props {
+    errorMessage?: string,
     icon: React.ReactNode,
-    label: string,
+    label?: string,
+    onBlur: any,
+    onChangeText: any,
     placeholder: string,
+    value?: string,
 }
 
-const FormTextInput: React.FC<Props> = ({ icon, label, placeholder }) => {
+const FormTextInput: React.FC<Props> = ({ errorMessage, icon, label, onBlur, onChangeText, placeholder, value }) => {
 
-    const { bg_light, center_x, my_5, p_5, row_center_x, w_25 } = styles
-    const { darkGrey, primary } = colors
+    const { bg_light, center_x, me_5, my_5, p_5, px_5, row_center_x, w_25 } = styles
+    const { darkGrey, red } = colors
 
     return (
         <View style={my_5}>
@@ -23,8 +27,23 @@ const FormTextInput: React.FC<Props> = ({ icon, label, placeholder }) => {
                 <View style={[center_x, w_25]}>
                     {icon}
                 </View>
-                <TextInput placeholder={placeholder} />
+
+                <TextInput
+                    autoCapitalize="characters"
+                    onBlur={onBlur}
+                    onChangeText={onChangeText}
+                    placeholder={placeholder}
+                    value={value}
+                />
             </View>
+
+            {
+                errorMessage &&
+                <View style={px_5}>
+                    <AppText as='h5' bold color={red}>{errorMessage}</AppText>
+                </View>
+            }
+
         </View>
     );
 }

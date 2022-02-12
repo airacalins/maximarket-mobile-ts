@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
 import { FlatList, View } from 'react-native';
 import { useDispatch } from 'react-redux';
-
-import ModeOfPaymentItem from '../../components/item/ModeOfPaymentItem';
-import LoadingScreen from '../../components/indicator/LoadingScreen';
-import { fetchModeOfPaymentsAsync } from '../../reducers/modeOfPaymentSlice';
 import { useAppSelecter } from '../../store/configureStore';
 
+import { fetchModeOfPaymentsAsync } from '../../reducers/modeOfPaymentSlice';
 import { styles } from '../../styles/styles';
+import ModeOfPaymentItem from '../../components/item/ModeOfPaymentItem';
 import NoData from '../../components/indicator/NoData';
-
+import LoadingScreen from '../../components/indicator/LoadingScreen';
 
 const ModeOfPaymentsScreen = () => {
     const { bg_light, container, p_10, separator } = styles

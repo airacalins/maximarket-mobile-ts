@@ -4,6 +4,7 @@ import colors from "./colors";
 
 export const styles = StyleSheet.create({
     bg_dark: { backgroundColor: colors.dark },
+    bg_darken: { backgroundColor: "rgba(0,0,0,0.5)" },
     bg_light: { backgroundColor: colors.light },
     bg_primary: { backgroundColor: colors.primary },
     bg_secondary: { backgroundColor: colors.secondary },
@@ -11,7 +12,8 @@ export const styles = StyleSheet.create({
     rounded: { borderRadius: 15 },
     rounded: { borderRadius: 15 },
 
-    center_x: { display: 'flex', alignSelf: 'center' },
+    centered: { alignSelf: 'center', display: 'flex', justifyContent: 'center' },
+    center_x: { alignSelf: 'center', display: 'flex' },
 
     container: {
         margin: 15
@@ -42,6 +44,8 @@ export const styles = StyleSheet.create({
         width: 35,
     },
 
+    bg_darken: { backgroundColor: "rgba(0,0,0,0.5)" },
+
     m_5: { margin: 5 },
     m_15: { margin: 15 },
     mb_5: { marginBottom: 5 },
@@ -58,6 +62,7 @@ export const styles = StyleSheet.create({
     p_10: { padding: 10 },
     p_15: { padding: 15 },
     pb_15: { paddingBottom: 15 },
+    px_5: { paddingHorizontal: 5 },
     px_15: { paddingHorizontal: 15 },
     py_10: { paddingVertical: 10 },
     py_15: { paddingVertical: 15 },
@@ -76,5 +81,6 @@ export const styles = StyleSheet.create({
     w_10p: { width: "10%", },
     w_15p: { width: "15%", },
     w_50p: { width: "50%" },
+    w_100p: { width: "100%" }
 })
 

@@ -1,18 +1,17 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet } from 'react-native';
+import { Provider } from 'react-redux';
+import { store, useAppSelecter } from './src/store/configureStore';
+
+
 import AuthNavigator from './src/navigations/AuthNavigator';
 import BottomTabNavigator from './src/navigations/BottomTabNavigator';
-import HomeNavigator from './src/navigations/BottomTabNavigator';
-import LoginFormScreen from './src/screens/account/LoginFormScreen';
-import { Provider, useSelector } from 'react-redux';
-import { store } from './src/store/configureStore';
-
 
 function App() {
+  const { tenant } = useAppSelecter((state) => state.tenant)
+
   return (
     <NavigationContainer>
-      <BottomTabNavigator />
-      {/* <AuthNavigator /> */}
+      {!!tenant ? <BottomTabNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 }

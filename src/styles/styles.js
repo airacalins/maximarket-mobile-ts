@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
     bg_primary: { backgroundColor: colors.primary },
     bg_secondary: { backgroundColor: colors.secondary },
 
-    bordered: { borderRadius: 15 },
+    rounded: { borderRadius: 15 },
+    rounded: { borderRadius: 15 },
 
     center_x: { display: 'flex', alignSelf: 'center' },
 
@@ -35,6 +36,7 @@ export const styles = StyleSheet.create({
     p_15: { padding: 15 },
     pb_15: { paddingBottom: 15 },
     px_15: { paddingHorizontal: 15 },
+    py_10: { paddingVertical: 10 },
     py_15: { paddingVertical: 15 },
     py_25: { paddingVertical: 25 },
 
@@ -48,5 +50,5 @@ export const styles = StyleSheet.create({
     w_10: { width: "10%", },
     w_15: { width: "15%", },
     w_50: { width: "50%" },
-
 })
+

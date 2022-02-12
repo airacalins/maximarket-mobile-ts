@@ -7,12 +7,19 @@ import SlotDetailsScreen from '../screens/slot/SlotDetailsScreen';
 import SlotsScreen from '../screens/slot/SLotsScreen';
 import ModeOfPaymentsScreen from '../screens/modeOfPayment/ModeOfPayments';
 import ContactScreen from '../screens/contact/ContactsScreen';
+import MenusScreen from '../screens/menu/MenusScreen';
 
 const Stack = createNativeStackNavigator();
 
 const MenuNavigator = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator >
+            <Stack.Screen
+                name={routes.MENU}
+                component={MenusScreen}
+                options={{ headerShown: false }}
+            />
+
             <Stack.Screen
                 name={routes.ACCOUNT_FORM}
                 component={AccountFormScreen}

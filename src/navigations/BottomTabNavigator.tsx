@@ -19,7 +19,6 @@ const BottomTabNavigator = () => {
                 name="MenuNavigator"
                 component={MenuNavigator}
                 options={{ headerShown: false }}
-
             />
         </Tab.Navigator>
     );

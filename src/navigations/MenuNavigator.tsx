@@ -4,10 +4,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import routes from './routes';
 import AccountFormScreen from '../screens/account/AccountFormScreen';
 import ContactScreen from '../screens/contact/ContactsScreen';
-import SlotDetailsScreen from '../screens/slot/SlotDetailsScreen';
-import SlotsScreen from '../screens/slot/SLotsScreen';
+import SlotsScreen from '../screens/slot/SlotsScreen';
 import MenusScreen from '../screens/menu/MenusScreen';
 import ModeOfPaymentsScreen from '../screens/modeOfPayment/ModeOfPayments';
+import StoreDetails from '../screens/store/StoreDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,10 +27,9 @@ const MenuNavigator = () => {
             />
 
             <Stack.Screen
-                name={routes.SLOT_DETAILS}
-                component={SlotDetailsScreen}
+                name={routes.STORE_DETAILS}
+                component={StoreDetails}
                 options={{ title: "My Store" }}
-
             />
 
             <Stack.Screen

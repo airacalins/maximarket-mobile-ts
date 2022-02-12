@@ -1,15 +1,15 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import FormTextInput from '../../components/input/FormTextInput';
-import { styles } from '../../styles/styles';
-import { FontAwesome } from '@expo/vector-icons';
-import colors from '../../styles/colors';
+import { View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import AppButton from '../../components/button/AppButton';
+import { FontAwesome } from '@expo/vector-icons';
 
+import colors from '../../styles/colors';
+import { styles } from '../../styles/styles';
+import AppButton from '../../components/button/AppButton';
+import FormTextInput from '../../components/input/FormTextInput';
 
 const AccountFormScreen = () => {
-    const { bg_light, container, my_5, p_5 } = styles
+    const { container } = styles
 
     return (
         <View style={container}>

@@ -16,5 +16,6 @@ export default Object.freeze({
     SLOTS: "Slots",
     SLOT_DETAILS: 'SlotDetails',
     SLOT_LOCATOR: ' SlotLocator',
+    STORE_DETAILS: 'StoreDetails',
     SURVEY_FORM: ' SurveyForm',
 });

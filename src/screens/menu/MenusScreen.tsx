@@ -34,7 +34,7 @@ const MenusScreen: React.FC<Props> = ({ navigation }) => {
                     title='My Store'
                     subtitle='View rented slot details'
                     icon={<FontAwesome5 name="store" size={20} color={light} />}
-                    onPress={() => navigation.navigate(routes.SLOT_DETAILS)}
+                    onPress={() => navigation.navigate(routes.STORE_DETAILS)}
                 />
             </View>
 

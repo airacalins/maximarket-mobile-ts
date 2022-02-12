@@ -3,7 +3,8 @@
   "expoServerPort": 19000,
   "packagerPort": 19000,
   "webpackServerPort": 19006,
-  "expoServerNgrokUrl": "https://4c-pd3.airacalins.maximarket-mobile-ts.exp.direct",
-  "packagerNgrokUrl": "https://packager.4c-pd3.airacalins.maximarket-mobile-ts.exp.direct",
-  "ngrokPid": 24753
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "packagerPid": null
 }

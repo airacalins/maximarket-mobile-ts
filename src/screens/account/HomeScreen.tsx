@@ -10,11 +10,11 @@ import AppText from '../../components/text/AppText';
 
 const HomeScreen = () => {
 
-    const { bg_dark, bg_light, bg_secondary, center_x, container, icon_circle_xs, me_8, my_5, my_15, p_15, pb_15, px_15, py_25, rounded, row, row_center_x, w_15p, w_50p } = styles;
+    const { bg_dark, bg_light, bg_secondary, center_x, container_full, icon_circle_xs, me_8, my_5, my_15, p_15, pb_15, px_15, py_25, rounded, row, row_center_x, w_30, w_50p } = styles;
     const { darkGrey, light, primary } = colors;
 
     return (
-        <View style={container}>
+        <View style={container_full}>
             <View style={my_5}>
                 <AppText bold color={darkGrey}>Hi, Name</AppText>
                 <AppText bold>ACCNTNMBR</AppText>
@@ -52,7 +52,7 @@ const HomeScreen = () => {
             </View>
 
             <View style={[row_center_x, bg_light, p_15, rounded, my_5]}>
-                <View style={w_15p}>
+                <View style={w_30}>
                     <MaterialCommunityIcons name="contactless-payment-circle" size={28} color={primary} />
                 </View>
                 <View>
@@ -62,7 +62,7 @@ const HomeScreen = () => {
             </View>
 
             <View style={[row_center_x, bg_light, p_15, rounded, my_5]}>
-                <View style={w_15p}>
+                <View style={w_30}>
                     <FontAwesome name="file-text-o" size={22} color={primary} />
                 </View>
                 <View>

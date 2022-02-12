@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import routes from './routes';
 
 import LoginFormScreen from '../screens/account/LoginFormScreen';
-import SlotsScreen from '../screens/slot/SLotsScreen';
+import SlotsScreen from '../screens/slot/SlotsScreen';
 
 const Stack = createNativeStackNavigator();
 

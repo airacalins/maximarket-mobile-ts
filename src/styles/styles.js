@@ -44,6 +44,7 @@ export const styles = StyleSheet.create({
     row_center_y: { alignItems: 'center', display: 'flex', justifyContent: 'center' },
 
     p_5: { padding: 5 },
+    p_10: { padding: 10 },
     p_15: { padding: 15 },
     pb_15: { paddingBottom: 15 },
     px_15: { paddingHorizontal: 15 },
@@ -54,6 +55,7 @@ export const styles = StyleSheet.create({
     m_5: { margin: 5 },
     mb_5: { marginBottom: 5 },
     mb_10: { marginBottom: 10 },
+    mb_15: { marginBottom: 15 },
     me_5: { marginRight: 5 },
     me_8: { marginRight: 8 },
     me_10: { marginRight: 10 },
@@ -61,7 +63,9 @@ export const styles = StyleSheet.create({
     my_10: { marginVertical: 10 },
     my_15: { marginVertical: 15 },
 
+    w_20: { width: 20 },
     w_25: { width: 25 },
+    w_30: { width: 30 },
     w_10p: { width: "10%", },
     w_15p: { width: "15%", },
     w_50p: { width: "50%" },

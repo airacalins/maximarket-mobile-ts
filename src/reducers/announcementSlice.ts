@@ -12,7 +12,7 @@ export interface IAnnouncementState {
   }
 
 const initialState = {
-    announcements: [],
+    announcements: [] as Array<IAnnouncement>,
     announcement: undefined,
     isFetchingAnnouncements: false,
     isFetchingAnnouncementDetails: false,

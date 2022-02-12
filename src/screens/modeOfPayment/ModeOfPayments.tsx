@@ -29,7 +29,7 @@ const ModeOfPaymentsScreen = () => {
 
                 <FlatList
                     data={modeOfPayments}
-                    keyExtractor={(modeOfPayment) => modeOfPayment.id}
+                    keyExtractor={(m) => m.id}
                     renderItem={({ item }) =>
                         <ModeOfPaymentItem bankName={item.bankName} accountName={item.accountName} accountNumber={item.accountNumber} />
                     }

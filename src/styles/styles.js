@@ -71,6 +71,7 @@ export const styles = StyleSheet.create({
     row: { display: 'flex', flexDirection: 'row' },
     row_center: { alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'center' },
     row_center_x: { alignItems: 'center', display: 'flex', flexDirection: 'row' },
+    row_center_x_between: { alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' },
     row_center_y: { alignItems: 'center', display: 'flex', justifyContent: 'center' },
 
     separator: { borderWidth: 0.5, borderColor: colors.secondary },

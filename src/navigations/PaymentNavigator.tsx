@@ -13,13 +13,11 @@ const PaymentNavigator = () => {
             <Stack.Screen
                 name={routes.PAYMENTS}
                 component={PaymentsScreen}
-                options={{ headerShown: false }}
             />
 
             <Stack.Screen
                 name={routes.PAYMENT_DETAILS}
                 component={PaymentDetailsScreen}
-                options={{ headerShown: false }}
             />
         </Stack.Navigator>
     );

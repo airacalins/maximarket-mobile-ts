@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ImageBackground, Keyboard, ToastAndroid, View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { useAppSelecter } from '../../store/configureStore';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-
-import { styles } from '../../styles/styles';
 import colors from '../../styles/colors';
+import { styles } from '../../styles/styles';
+import { useAppSelecter } from '../../store/configureStore';
+import { fetchTenantDetailsAsync } from '../../reducers/tenantSlice';
 import AppButton from '../../components/button/AppButton';
 import AppText from '../../components/text/AppText';
 import FormTextInput from '../../components/input/FormTextInput';
-import routes from '../../navigations/routes';
-import { Formik } from 'formik';
-import { fetchTenantDetailsAsync } from '../../reducers/tenantSlice';
 import LoadingScreen from '../../components/indicator/LoadingScreen';
 
 interface Props {
@@ -77,20 +75,11 @@ const LoginFormScreen: React.FC<Props> = ({ navigation }) => {
                             )
                         }
                     </Formik>
-
-
-
                 </View>
             </View>
         </ImageBackground >
 
     );
 }
-
-{/* <FormTextInput
-    icon={<MaterialCommunityIcons name="clipboard-account" size={18} color={colors.primary} />}
-    placeholder='Enter Account Number'
-/>
-<AppButton onPress={() => console.log("Pressed")} title='Submit' /> */}
 
 export default LoginFormScreen;

@@ -2,6 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import routes from './routes';
 
+import ContactScreen from '../screens/contact/ContactsScreen';
 import SlotsScreen from '../screens/slot/SlotsScreen';
 import SlotDetailsScreen from '../screens/slot/SlotDetailsScreen';
 
@@ -18,6 +19,11 @@ const SlotNavigator = () => {
             <Stack.Screen
                 name={routes.SLOT_DETAILS}
                 component={SlotDetailsScreen}
+            />
+
+            <Stack.Screen
+                name={routes.CONTACTS}
+                component={ContactScreen}
             />
         </Stack.Navigator>
     );

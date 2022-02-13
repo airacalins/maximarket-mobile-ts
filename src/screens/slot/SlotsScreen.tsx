@@ -29,8 +29,8 @@ const SlotsScreen: React.FC<Props> = ({ navigation }) => {
     }, [slots])
 
     const handleSlotDetails = async (id: string) => {
-        await dispatch(fetchSlotDetailsAsync(id));
         navigation.navigate(routes.SLOT_DETAILS)
+        await dispatch(fetchSlotDetailsAsync(id));
     }
 
     const { bg_light, container, flex_1, mb_25, mx_15, my_5, p_15, px_15, rounded, row_center_x_between } = styles

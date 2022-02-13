@@ -13,6 +13,17 @@ const AccountFormScreen = () => {
 
     return (
         <View style={[container]}>
+
+            {/* <Detail title="Status" value={
+                isActive ?
+                    <View style={[badge, bg_green]} >
+                        <AppText as="h5" bold color={light} italic>Active</AppText>
+                    </View> :
+
+                    <View style={[badge, bg_red]} >
+                        <AppText as="h5" bold color={light} italic>Deativated</AppText>
+                    </View>
+            } /> */}
             <FormTextInput icon={<FontAwesome name="user" size={18} color={colors.primary} />} label='First Name' placeholder='First Name' />
             <FormTextInput icon={<FontAwesome name="user" size={18} color={colors.primary} />} label='Last Name' placeholder='Last Name' />
             <FormTextInput icon={<AntDesign name="idcard" size={18} color={colors.primary} />} label='Business Name' placeholder='Business Name' />

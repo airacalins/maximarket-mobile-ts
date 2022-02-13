@@ -22,16 +22,6 @@ const StoreDetails = ({ }) => {
 
     return (
         <View style={[bg_light, container, p_15, rounded]}>
-            <Detail title="Status" value={
-                isActive ?
-                    <View style={[badge, bg_green]} >
-                        <AppText as="h5" bold color={light} italic>Active</AppText>
-                    </View> :
-
-                    <View style={[badge, bg_red]} >
-                        <AppText as="h5" bold color={light} italic>Deativated</AppText>
-                    </View>
-            } />
             <Detail title="Account Number" value={tenantUniqueId} />
             <Detail title="Slot Number" value={slotNumber} />
             <Detail title="Size" value={size} />

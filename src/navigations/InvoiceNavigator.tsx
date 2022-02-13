@@ -4,6 +4,7 @@ import routes from './routes';
 
 import InvoicesScreen from '../screens/invoice/InvoicesScreen';
 import CreatePaymentNavigator from './CreatePaymentNavigator';
+import InvoiceDetailsScreen from '../screens/invoice/InvoiceDetailsScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -17,9 +18,10 @@ const InvoiceNavigator = () => {
             />
 
             <Stack.Screen
-                name="CreatePaymentNavigator"
-                component={CreatePaymentNavigator}
+                name={routes.INVOICE_DETAILS}
+                component={InvoiceDetailsScreen}
             />
+
         </Stack.Navigator>
     );
 }

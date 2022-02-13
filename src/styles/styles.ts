@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import Constants from 'expo-constants';
 import colors from "./colors";
 
-const { dark, green, light, primary, red, secondary } = colors
+const { dark, green, light, primary, red, secondary, yellow } = colors
 
 export const styles = StyleSheet.create({
 
@@ -18,6 +18,7 @@ export const styles = StyleSheet.create({
     bg_primary: { backgroundColor: primary },
     bg_red: { backgroundColor: red },
     bg_secondary: { backgroundColor: secondary },
+    bg_yellow: { backgroundColor: yellow },
 
     rounded: { borderRadius: 15 },
 

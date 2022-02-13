@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import agent from "../api/agent";
-import { ITenant } from "../models/Tenant";
+import { ITenant, IUpdateTenantInput } from "../models/Tenant";
 import { IContractPhotos } from "../models/TenantContract";
 
 export interface ITenantState {
@@ -32,11 +32,22 @@ export const fetchTenantDetailsAsync = createAsyncThunk<ITenant, string>(
   }
 )
 
+export const updateTenantDetailsAsync = createAsyncThunk<ITenant, IUpdateTenantInput>(
+  'tenants/updateTenantDetailsAsync',
+  async (tenant, thunkAPI) => {
+    try {
+      return await agent.Tenant.update(tenant);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({error: error.data})
+    }
+  }
+)
+
 export const getTenantContractPhoto = createAsyncThunk<any, string>(
   'tenants/getTenantContractPhoto',
-  async (model, thunkAPI) => {
+  async (id, thunkAPI) => {
     try {
-      return await agent.Tenant.getContractPhotos(model);
+      return await agent.Tenant.getContractPhotos(id);
     } catch (error: any) {
       return thunkAPI.rejectWithValue({error: error.data})
     }
@@ -47,6 +58,9 @@ export const tenantSlice = createSlice({
   name: 'tenant',
   initialState,
   reducers: {
+    resetTenant(state) {
+      state.tenant = undefined;
+    },
   },
   extraReducers: (builder => {
 
@@ -79,7 +93,21 @@ export const tenantSlice = createSlice({
     });
 
 
+    builder.addCase(updateTenantDetailsAsync.pending, (state, action) => {
+      state.isSaving = true;
+    });
+
+    builder.addCase(updateTenantDetailsAsync.fulfilled, (state, action) => {
+        state.isSaving = false;
+    });
+
+    builder.addCase(updateTenantDetailsAsync.rejected, (state, action) => {
+        state.isSaving = false;
+    });
+
+
   })
 })
 
-export const { } = tenantSlice.actions;
+export const { resetTenant } = tenantSlice.actions;
+export default tenantSlice

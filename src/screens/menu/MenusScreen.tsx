@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -9,22 +9,34 @@ import { styles } from '../../styles/styles';
 import AppText from '../../components/text/AppText';
 import AppMenu from '../../components/menu/AppMenu';
 import routes from '../../navigations/routes';
+import { useAppDispatch, useAppSelecter } from '../../store/configureStore';
+import LoadingScreen from '../../components/indicator/LoadingScreen';
+import { resetTenant } from '../../reducers/tenantSlice';
 
 interface Props {
     navigation: any
 }
 
 const MenusScreen: React.FC<Props> = ({ navigation }) => {
+    const dispatch = useAppDispatch();
+    const { tenant, isFetchingTenantDetails, isSaving } = useAppSelecter((state) => state.tenant)
+    const { firstName, lastName } = tenant!
+
+    useEffect(() => {
+        if (!tenant) navigation.navigate("AuthNavigator")
+    }, [])
 
     const { bg_light, container_full, mb_10, rounded } = styles;
     const { light } = colors;
+
+    if (isFetchingTenantDetails || isSaving) return <LoadingScreen />
 
     return (
         <View style={container_full}>
 
             <View style={[bg_light, rounded, mb_10]}>
                 <AppMenu
-                    title='Name'
+                    title={`${firstName} ${lastName}`}
                     subtitle='Edit Personal Information'
                     icon={<FontAwesome5 name="user" size={20} color={light} />}
                     onPress={() => navigation.navigate(routes.ACCOUNT_FORM)}
@@ -64,7 +76,11 @@ const MenusScreen: React.FC<Props> = ({ navigation }) => {
                     title='Logout'
                     subtitle='Logout'
                     icon={<MaterialCommunityIcons name="logout-variant" size={20} color={light} />}
-                    onPress={() => navigation.navigate(routes.LOGIN)}
+                    onPress={
+                        () => {
+                            dispatch(resetTenant());
+                        }
+                    }
                 />
             </View>
         </View>

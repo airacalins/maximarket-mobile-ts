@@ -19,7 +19,7 @@ interface Props {
 
 const LoginFormScreen: React.FC<Props> = ({ navigation }) => {
 
-    const { tenant, isFetchingTenantDetails, errorMessage } = useAppSelecter((state) => state.tenant)
+    const { isFetchingTenantDetails, errorMessage } = useAppSelecter((state) => state.tenant)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -27,10 +27,6 @@ const LoginFormScreen: React.FC<Props> = ({ navigation }) => {
             ToastAndroid.show(errorMessage, ToastAndroid.SHORT);
         };
     }, [errorMessage])
-
-    useEffect(() => {
-        if (!!tenant) navigation.navigate("HomeNavigator")
-    }, [tenant])
 
     const validationSchema = Yup.object({
         accountNumber: Yup.string().required("Account Number is required.")

@@ -8,6 +8,7 @@ import MenusScreen from '../screens/menu/MenusScreen';
 import ModeOfPaymentsScreen from '../screens/modeOfPayment/ModeOfPayments';
 import StoreDetails from '../screens/store/StoreDetails';
 import SlotNavigator from './SlotNavigator';
+import AuthNavigator from './AuthNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,12 @@ const MenuNavigator = () => {
                 name={routes.CONTACTS}
                 component={ContactScreen}
                 options={{ title: "Contact Us" }}
+            />
+
+            <Stack.Screen
+                name={"AuthNavigator"}
+                component={AuthNavigator}
+                options={{ headerShown: false }}
             />
         </Stack.Navigator>
     );

@@ -17,13 +17,8 @@ interface Props {
 }
 
 const AnnouncementsScreen: React.FC<Props> = ({ navigation }) => {
-    const { tenant } = useAppSelecter((state) => state.tenant)
     const { announcements, isFetchingAnnouncements } = useAppSelecter((state) => state.announcement)
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        if (!tenant) navigation.navigate("AuthNavigator")
-    }, [tenant])
 
     useEffect(() => {
         dispatch(fetchAnnouncementsAsync());

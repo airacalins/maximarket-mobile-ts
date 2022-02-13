@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import routes from '../../navigations/routes';
 import { FlatList, View } from 'react-native';
 
-import { useAppSelecter } from '../../store/configureStore';
+import { useAppDispatch, useAppSelecter } from '../../store/configureStore';
 import colors from '../../styles/colors';
 import { styles } from '../../styles/styles';
 import { dateFormatter } from '../../utils/dateFormatter';
@@ -10,21 +10,26 @@ import AppButton from '../../components/button/AppButton';
 import AppText from '../../components/text/AppText';
 import InvoiceBadge from '../../components/badge/InvoiceBadge';
 import LoadingScreen from '../../components/indicator/LoadingScreen';
+import { fetchInvoiceDetailsAsync } from '../../reducers/invoiceSlice';
 
 interface Props {
     navigation: any
 }
 
 const InvoiceDetailsScreen: React.FC<Props> = ({ navigation }) => {
-
+    const { tenant } = useAppSelecter((state) => state.tenant)
     const { invoice, isFetchingInvoiceDetails } = useAppSelecter((state) => state.invoice)
-
-    const { amount, dateCreated, dueDate, invoiceItems, invoiceNumber, invoiceStatus } = invoice!
 
     const { bg_light, bg_primary, container, mx_15, my_15, p_5, p_15, rounded, row_center_x_between, row, w_50p } = styles;
     const { darkGrey, light } = colors
 
-    if (isFetchingInvoiceDetails) return <LoadingScreen />
+    useEffect(() => {
+        if (!invoice) fetchInvoiceDetailsAsync(tenant?.tenantUniqueId!)
+    }, [invoice])
+
+    if (isFetchingInvoiceDetails || !invoice) return <LoadingScreen />
+
+    const { amount, dateCreated, dueDate, invoiceItems, invoiceNumber, invoiceStatus } = invoice;
 
     return (
         <>

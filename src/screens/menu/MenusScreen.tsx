@@ -47,7 +47,7 @@ const MenusScreen: React.FC<Props> = ({ navigation }) => {
                 />
 
                 <AppMenu
-                    title='Mode of Payment'
+                    title='Mode of Payments'
                     subtitle='List of acceptable payment methods'
                     icon={<Ionicons name="card" size={20} color={light} />}
                     onPress={() => navigation.navigate(routes.MODE_OF_PAYMENTS)}

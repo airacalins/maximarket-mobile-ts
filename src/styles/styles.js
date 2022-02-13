@@ -2,12 +2,23 @@ import { StyleSheet } from "react-native";
 import Constants from 'expo-constants';
 import colors from "./colors";
 
+const { dark, green, light, primary, red, secondary } = colors
+
 export const styles = StyleSheet.create({
-    bg_dark: { backgroundColor: colors.dark },
+
+    badge: {
+        paddingHorizontal: 5,
+        borderRadius: 5,
+    },
+
+    bg_dark: { backgroundColor: dark },
     bg_darken: { backgroundColor: "rgba(0,0,0,0.5)" },
-    bg_light: { backgroundColor: colors.light },
-    bg_primary: { backgroundColor: colors.primary },
-    bg_secondary: { backgroundColor: colors.secondary },
+    bg_green: { backgroundColor: green },
+    bg_red: { backgroundColor: red },
+    bg_light: { backgroundColor: light },
+    bg_primary: { backgroundColor: primary },
+    bg_red: { backgroundColor: red },
+    bg_secondary: { backgroundColor: secondary },
 
     rounded: { borderRadius: 15 },
     rounded: { borderRadius: 15 },
@@ -74,7 +85,7 @@ export const styles = StyleSheet.create({
     row_center_x_between: { alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' },
     row_center_y: { alignItems: 'center', display: 'flex', justifyContent: 'center' },
 
-    separator: { borderWidth: 0.5, borderColor: colors.secondary },
+    separator: { borderWidth: 0.5, borderColor: secondary },
 
     w_20: { width: 20 },
     w_25: { width: 25 },

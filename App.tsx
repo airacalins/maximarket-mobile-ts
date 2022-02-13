@@ -5,6 +5,7 @@ import { store, useAppSelecter } from './src/store/configureStore';
 
 import AuthNavigator from './src/navigations/AuthNavigator';
 import BottomTabNavigator from './src/navigations/BottomTabNavigator';
+import { useEffect } from 'react';
 
 function App() {
   const { tenant } = useAppSelecter((state) => state.tenant)

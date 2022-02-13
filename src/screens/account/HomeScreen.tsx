@@ -9,6 +9,7 @@ import colors from '../../styles/colors';
 import { styles } from '../../styles/styles';
 import AppText from '../../components/text/AppText';
 import AppMenu from '../../components/menu/AppMenu';
+import { dateFormatter } from '../../utils/dateFormatter';
 
 interface Props {
     navigation: any
@@ -17,11 +18,9 @@ interface Props {
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { tenant } = useAppSelecter((state) => state.tenant)
 
-    useEffect(() => {
-        if (!tenant) navigation.navigate("AuthNavigator")
-    }, [tenant])
+    const { firstName, tenantUniqueId, contract } = tenant!;
+    const { slotNumber, nextBillingDate } = contract!;
 
-    const { firstName, tenantUniqueId } = tenant!;
     const { bg_dark, bg_light, bg_secondary, center_x, container_full, icon_circle_xs, mb_10, me_8, my_5, my_15, pb_15, px_15, py_25, rounded, row, row_center_x, row_center_x_between, w_50p } = styles;
     const { darkGrey, light } = colors;
 
@@ -53,7 +52,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
                         <View>
                             <AppText as="h5" color={light}>Slot Number</AppText>
-                            <AppText as="h5" bold color={light}>A-002</AppText>
+                            <AppText as="h5" bold color={light}>{slotNumber}</AppText>
                         </View>
                     </View>
 
@@ -64,7 +63,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
                         <View>
                             <AppText as="h5" color={light}>Nexy Billing Date</AppText>
-                            <AppText as="h5" bold color={light}>Mar 07, 2022</AppText>
+                            <AppText as="h5" bold color={light}>{dateFormatter(nextBillingDate)}</AppText>
                         </View>
                     </View>
                 </View>

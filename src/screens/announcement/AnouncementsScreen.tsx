@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
+import routes from '../../navigations/routes';
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { fetchAnnouncementDetailsAsync, fetchAnnouncementsAsync } from '../../reducers/announcementSlice';
 import { useAppSelecter } from '../../store/configureStore';
-import routes from '../../navigations/routes';
 import colors from '../../styles/colors';
 import { styles } from '../../styles/styles';
+import { dateFormatter } from '../../utils/dateFormatter';
 import AppText from '../../components/text/AppText';
 import LoadingScreen from '../../components/indicator/LoadingScreen';
 import NoData from '../../components/indicator/NoData';
@@ -48,7 +49,7 @@ const AnnouncementsScreen: React.FC<Props> = ({ navigation }) => {
                     <TouchableOpacity onPress={() => handleAnnouncementDetails(item.id)}>
                         <View style={[bg_light, my_5, p_15, rounded,]}>
                             <AppText as='h4' bold>{item.title}</AppText>
-                            <AppText as='h5' bold color={darkGrey}>{item.dateCreated}</AppText>
+                            <AppText as='h5' bold color={darkGrey}>{dateFormatter(item.dateCreated)}</AppText>
                         </View>
                     </TouchableOpacity>
                 }

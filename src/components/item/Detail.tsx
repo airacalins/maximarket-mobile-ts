@@ -6,7 +6,7 @@ import AppText from '../text/AppText';
 
 interface Props {
     title: string,
-    value: string
+    value: any,
 }
 
 const Detail: React.FC<Props> = ({ title, value }) => {

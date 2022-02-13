@@ -43,7 +43,7 @@ const MenusScreen: React.FC<Props> = ({ navigation }) => {
                     title='Slot Locator'
                     subtitle='Visual map and available slots'
                     icon={<Ionicons name="location" size={20} color={light} />}
-                    onPress={() => navigation.navigate(routes.SLOT_LOCATOR)}
+                    onPress={() => navigation.navigate('SlotNavigator')}
                 />
 
                 <AppMenu

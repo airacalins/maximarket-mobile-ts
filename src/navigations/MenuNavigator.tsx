@@ -4,10 +4,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import routes from './routes';
 import AccountFormScreen from '../screens/account/AccountFormScreen';
 import ContactScreen from '../screens/contact/ContactsScreen';
-import SlotsScreen from '../screens/slot/SlotsScreen';
 import MenusScreen from '../screens/menu/MenusScreen';
 import ModeOfPaymentsScreen from '../screens/modeOfPayment/ModeOfPayments';
 import StoreDetails from '../screens/store/StoreDetails';
+import SlotNavigator from './SlotNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,9 +33,12 @@ const MenuNavigator = () => {
             />
 
             <Stack.Screen
-                name={routes.SLOT_LOCATOR}
-                component={SlotsScreen}
-                options={{ title: "Slot Locator" }}
+                name={"SlotNavigator"}
+                component={SlotNavigator}
+                options={{
+                    headerShown: false,
+                    title: "Slot Locator"
+                }}
             />
 
             <Stack.Screen

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import agent from "../api/agent";
-import { IModeOfPayment } from "../components/models/ModeOfPayment";
+import { IModeOfPayment } from "../models/ModeOfPayment";
 
 export interface IModeOfPaymentState {
   modeOfPayments: IModeOfPayment[];

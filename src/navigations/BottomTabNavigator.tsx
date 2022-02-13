@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,13 +13,25 @@ const BottomTabNavigator = () => {
             <Tab.Screen
                 name="HomeNavigator"
                 component={HomeNavigator}
-                options={{ headerShown: false }}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="home" color={color} size={size} />
+                    ),
+                    title: "Home"
+                }}
             />
 
             <Tab.Screen
                 name="MenuNavigator"
                 component={MenuNavigator}
-                options={{ headerShown: false }}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="menu" color={color} size={size} />
+                    ),
+                    title: "Menu"
+                }}
             />
         </Tab.Navigator>
     );

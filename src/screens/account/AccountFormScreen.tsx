@@ -9,10 +9,10 @@ import AppButton from '../../components/button/AppButton';
 import FormTextInput from '../../components/input/FormTextInput';
 
 const AccountFormScreen = () => {
-    const { container } = styles
+    const { container, } = styles
 
     return (
-        <View style={container}>
+        <View style={[container]}>
             <FormTextInput icon={<FontAwesome name="user" size={18} color={colors.primary} />} label='First Name' placeholder='First Name' />
             <FormTextInput icon={<FontAwesome name="user" size={18} color={colors.primary} />} label='Last Name' placeholder='Last Name' />
             <FormTextInput icon={<AntDesign name="idcard" size={18} color={colors.primary} />} label='Business Name' placeholder='Business Name' />

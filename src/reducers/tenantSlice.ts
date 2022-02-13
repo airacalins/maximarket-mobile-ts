@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import agent from "../api/agent";
-import { ITenant } from "../components/models/Tenant";
-import { IContractPhotos } from "../components/models/TenantContract";
+import { ITenant } from "../models/Tenant";
+import { IContractPhotos } from "../models/TenantContract";
 
 export interface ITenantState {
   tenant?: ITenant;

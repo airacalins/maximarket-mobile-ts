@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import agent from "../api/agent";
-import { IAnnouncement } from "../components/models/Announcement";
+import { IAnnouncement } from "../models/Announcement";
 
 export interface IAnnouncementState {
     announcements: IAnnouncement[];

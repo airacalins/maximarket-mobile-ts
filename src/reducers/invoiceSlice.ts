@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import agent from "../api/agent";
-import { IInvoice } from "../components/models/Invoice";
+import { IInvoice } from "../models/Invoice";
 
 export interface IInvoiceState {
   invoices: IInvoice[];

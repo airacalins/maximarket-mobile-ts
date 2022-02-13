@@ -59,13 +59,13 @@ const Invoice = {
   details: (id: string) => request.get(`invoices/${id}`),
 }
 
-
 const ModeOfPayment = {
   list: () => request.get('modeOfPayments')
 }
 
 const Slot = {
-  list: () => request.get('slots')
+  list: () => request.get('slots'),
+  details: (id: string) => request.get(`slots/${id}`),
 }
 
 const Tenant = {
@@ -73,7 +73,6 @@ const Tenant = {
   getContractPhotos: (id: string) => request.get(`tenants/get-contract-photo/${id}`),
   update: (values: any) => request.put('tenants', values),
 };
-
 
 const agent = {
   Announcement,

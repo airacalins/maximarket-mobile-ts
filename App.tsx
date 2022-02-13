@@ -6,12 +6,13 @@ import { store, useAppSelecter } from './src/store/configureStore';
 import AuthNavigator from './src/navigations/AuthNavigator';
 import BottomTabNavigator from './src/navigations/BottomTabNavigator';
 import { useEffect } from 'react';
+import navigationTheme from './src/styles/navigationTheme';
 
 function App() {
   const { tenant } = useAppSelecter((state) => state.tenant)
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={navigationTheme}>
       {!!tenant ? <BottomTabNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );

@@ -14,13 +14,11 @@ export const styles = StyleSheet.create({
     bg_dark: { backgroundColor: dark },
     bg_darken: { backgroundColor: "rgba(0,0,0,0.5)" },
     bg_green: { backgroundColor: green },
-    bg_red: { backgroundColor: red },
     bg_light: { backgroundColor: light },
     bg_primary: { backgroundColor: primary },
     bg_red: { backgroundColor: red },
     bg_secondary: { backgroundColor: secondary },
 
-    rounded: { borderRadius: 15 },
     rounded: { borderRadius: 15 },
 
     centered: { alignSelf: 'center', display: 'flex', justifyContent: 'center' },
@@ -55,16 +53,17 @@ export const styles = StyleSheet.create({
         width: 35,
     },
 
-    bg_darken: { backgroundColor: "rgba(0,0,0,0.5)" },
-
     m_5: { margin: 5 },
     m_15: { margin: 15 },
     mb_5: { marginBottom: 5 },
     mb_10: { marginBottom: 10 },
     mb_15: { marginBottom: 15 },
+    mb_25: { marginBottom: 25000 },
     me_5: { marginRight: 5 },
     me_8: { marginRight: 8 },
     me_10: { marginRight: 10 },
+    mt_15: {marginTop: 15},
+    mx_15: {marginHorizontal: 15},
     my_5: { marginVertical: 5 },
     my_10: { marginVertical: 10 },
     my_15: { marginVertical: 15 },

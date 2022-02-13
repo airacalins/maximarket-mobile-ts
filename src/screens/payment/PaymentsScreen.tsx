@@ -5,10 +5,14 @@ import { FontAwesome } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 import { styles } from '../../styles/styles';
 import AppText from '../../components/text/AppText';
+import { useAppSelecter } from '../../store/configureStore';
 
 const PaymentsScreen = () => {
     const { bg_light, container, me_5, my_5, p_15, row, row_center_x, row_center_x_between, rounded, w_30 } = styles;
     const { darkGrey, green, red, secondary, yellow } = colors;
+
+    const { tenant } = useAppSelecter((state) => state.tenant)
+
 
     const renderIcon = (status: number) => {
         if (status == 2) { <FontAwesome name="check-circle" size={30} color={green} /> }

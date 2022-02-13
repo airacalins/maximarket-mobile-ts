@@ -1,31 +1,87 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import LoadingScreen from '../../components/indicator/LoadingScreen';
 import FormTextInput from '../../components/input/FormTextInput';
 import AppText from '../../components/text/AppText';
-import { useAppSelecter } from '../../store/configureStore';
+import { useAppDispatch, useAppSelecter } from '../../store/configureStore';
 import colors from '../../styles/colors';
 import { styles } from '../../styles/styles';
 import { MaterialIcons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import RNPickerSelect from 'react-native-picker-select';
+import * as ImagePicker from 'expo-image-picker';
+import { FontAwesome } from '@expo/vector-icons';
 import AppButton from '../../components/button/AppButton';
-import { requestCameraPermissionsAsync } from 'expo-image-picker';
+import { fetchInvoiceDetailsAsync, fetchInvoicesAsync, createPaymentAsync, resetPaymentResult } from '../../reducers/invoiceSlice';
+import { Formik } from 'formik';
+import { fetchModeOfPaymentsAsync } from '../../reducers/modeOfPaymentSlice';
+import routes from '../../navigations/routes';
 
+interface Props {
+    navigation: any
+}
 
-const PaymentFormScreen = () => {
+const PaymentFormScreen: React.FC<Props> = ({ navigation }) => {
+    const dispatch = useAppDispatch()
+    const { tenant } = useAppSelecter((state) => state.tenant)
     const { invoice, isFetchingInvoiceDetails } = useAppSelecter((state) => state.invoice)
+    const { modeOfPayments, isFetchingModeOfPayments } = useAppSelecter(state => state.modeOfPayment);
 
-    const [image, setImage] = useState(null);
+    const [modeOfPaymentId, setModeOfPaymentId] = useState("")
+    const [amount, setAmount] = useState("")
+    const [image, setImage] = useState<any>(null);
+    const [imageData, setImageData] = useState<any>(null);
 
+    const [payment, setPayment] = useState({
+        modeOfPaymentId: "",
+        amount: 0,
+        file: ""
+    })
 
-
-    const { bg_light, container, my_5, p_30, row_center } = styles
+    const { bg_light, container, my_5, p_5, row_center, p_30 } = styles
     const { darkGrey, primary } = colors
 
-    const { invoiceNumber } = invoice!
+    useEffect(() => {
+        dispatch(fetchModeOfPaymentsAsync())
 
-    if (isFetchingInvoiceDetails) return <LoadingScreen />
+        return () => {
+            dispatch(resetPaymentResult())
+        }
+    }, [])
+
+    useEffect(() => {
+        if (!invoice) fetchInvoiceDetailsAsync(tenant?.tenantUniqueId!)
+    }, [invoice])
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            base64: true,
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            // aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result.cancelled) {
+            setImage(result.uri);
+            setImageData(result.base64);
+        }
+    };
+
+    const onSubmit = async () => {
+        if (!!setModeOfPaymentId && !!amount && !!image) {
+            navigation.navigate(routes.PAYMENT_DETAILS)
+            await dispatch(createPaymentAsync({
+                invoiceId: invoice?.id!,
+                modeOfPaymentId,
+                amount,
+                file: imageData!
+            }));
+            await dispatch(fetchInvoicesAsync(tenant?.tenantUniqueId!))
+            await dispatch(fetchInvoiceDetailsAsync(tenant?.tenantUniqueId!))
+        }
+    }
+    if (isFetchingInvoiceDetails || !invoice || isFetchingModeOfPayments) return <LoadingScreen />
+    const { invoiceNumber } = invoice
 
     return (
         <View style={container}>
@@ -35,17 +91,62 @@ const PaymentFormScreen = () => {
                 <AppText bold >{invoiceNumber}</AppText>
             </View>
 
-            {/* <FormTextInput label='Mode of Payment' />
-            <FormTextInput label='Amount' icon={<MaterialIcons name="money" size={20} color={primary} />} placeholder='Amount' /> */}
+            <Formik
+                initialValues={payment}
+                onSubmit={() => {
+                    onSubmit();
+                }}
+            >
+                {
+                    ({ handleSubmit, setFieldTouched, errors, touched }) => (
+                        <>
+                            <View style={my_5}>
+                                <AppText as="h5" bold color={darkGrey} >Mode of Payment</AppText>
+                                <View style={[bg_light, my_5, p_5]} >
+                                    <RNPickerSelect
+                                        onValueChange={(value) => setModeOfPaymentId(value)}
+                                        items={modeOfPayments.map(i => {
+                                            return { label: i.bankName, value: i.id || undefined }
+                                        })}
+                                        placeholder={{}}
+                                        style={{ inputAndroid: { color: 'black' } }}
+                                        useNativeAndroidPickerStyle={false}
+                                        value={modeOfPaymentId || undefined}
+                                    />
+                                </View>
+                            </View>
 
-            <View style={my_5}>
-                <AppText as="h5" bold color={darkGrey} >Proof of Payment</AppText>
-                <View style={[bg_light, p_30, row_center]}>
-                    <MaterialCommunityIcons name="camera-account" size={50} color={darkGrey} />
-                </View>
-            </View>
+                            <FormTextInput
+                                icon={<MaterialIcons name="money" size={20} color={primary} />}
+                                onBlur={() => setFieldTouched('amount')}
+                                onChangeText={(value: any) => setAmount(value)}
+                                label='Amount'
+                                placeholder='Amount'
+                                errorMessage={touched && errors.amount}
+                                value={amount}
+                            />
 
-            {/* <AppButton title='Submit' /> */}
+                            <View style={my_5}>
+                                <AppText as="h5" bold color={darkGrey} >Mode of Payment</AppText>
+                                <View style={bg_light}>
+                                    {
+                                        image ? <Image source={{ uri: image }} style={{ width: 200, height: 200 }} /> :
+                                            <TouchableOpacity onPress={pickImage}>
+                                                <View style={[row_center, p_30]}>
+                                                    <FontAwesome name="camera" size={50} color={darkGrey} />
+                                                </View>
+                                            </TouchableOpacity>
+                                    }
+                                </View>
+                            </View>
+
+                            <AppButton onPress={handleSubmit} title='Submit' />
+
+                        </>
+                    )
+                }
+            </Formik>
+
 
         </View>
     );

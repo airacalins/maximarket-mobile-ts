@@ -23,6 +23,18 @@ export interface IInvoiceItem {
     description: string,
 }
 
+export interface ICreatePaymentInput {
+    invoiceId: string,
+    modeOfPaymentId: string,
+    amount: string,
+    file: string
+}
+
+export interface IPaymentResult {
+    amount: number
+    dateCreated: Date
+    referenceNumber: string
+}
 
 export enum InvoiceStatus {
     Unpaid,
@@ -30,3 +42,4 @@ export enum InvoiceStatus {
     PartiallyPaid,
     Paid
 }
+

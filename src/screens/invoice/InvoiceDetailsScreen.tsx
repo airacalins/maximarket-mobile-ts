@@ -77,7 +77,7 @@ const InvoiceDetailsScreen: React.FC<Props> = ({ navigation }) => {
             </View>
 
             <View style={mx_15}>
-                <AppButton onPress={() => navigation.navigate(routes.PAYMENT_FORM)} title='Pay' />
+                <AppButton onPress={() => navigation.navigate("PaymentFormNavigator")} title='Pay' />
             </View>
         </>
     );

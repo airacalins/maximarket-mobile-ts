@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import agent from "../api/agent";
-import { IInvoice } from "../models/Invoice";
+import { ICreatePaymentInput, IInvoice, IPaymentResult } from "../models/Invoice";
 
 export interface IInvoiceState {
   invoices: IInvoice[];
@@ -9,6 +9,7 @@ export interface IInvoiceState {
   isFetchingInvoiceDetails: boolean;
   isSaving: boolean;
   isError: boolean;
+  paymentResult?: IPaymentResult
 }
 
 const initialState: IInvoiceState = {
@@ -17,8 +18,25 @@ const initialState: IInvoiceState = {
   invoice: undefined,
   isFetchingInvoiceDetails: false,
   isSaving: false,
-  isError: false
+  isError: false,
+  paymentResult: undefined,
 }
+
+export const createPaymentAsync = createAsyncThunk<IPaymentResult, ICreatePaymentInput>(
+  'invoice/createPaymentAsync',
+  async (payment, thunkAPI) => {
+    try {
+      const bodyFormData = new FormData();
+      bodyFormData.append('invoiceId', payment.invoiceId);
+      bodyFormData.append('file', payment.file);
+      bodyFormData.append('modeOfPaymentId', payment.modeOfPaymentId);
+      bodyFormData.append('amount', `${payment.amount}`);
+      return await agent.Invoice.create(bodyFormData) as any;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({error: error.data})
+    }
+  }
+)
 
 export const fetchInvoicesAsync = createAsyncThunk<IInvoice[], string>(
   'invoice/fetchInvoicessAsync',
@@ -45,9 +63,25 @@ export const fetchInvoiceDetailsAsync = createAsyncThunk<IInvoice, string>(
 export const invoiceSlice = createSlice({
   name: 'invoice',
   initialState,
-  reducers: {},
+  reducers: {
+    resetPaymentResult(state) {
+      state.paymentResult = undefined;
+    },
+  },
+
 
   extraReducers: (builder => {
+
+    builder.addCase(createPaymentAsync.pending, (state, action) => {
+      state.isSaving = true;
+    });
+    builder.addCase(createPaymentAsync.fulfilled, (state, action) => {
+      state.paymentResult = action.payload
+      state.isSaving = false;
+    });
+    builder.addCase(createPaymentAsync.rejected, (state, action) => {
+        state.isSaving = false;
+    });
 
     builder.addCase(fetchInvoicesAsync.pending, (state, action) => {
         state.isError = false;
@@ -80,4 +114,4 @@ export const invoiceSlice = createSlice({
   })
 })
 
-export const {  } = invoiceSlice.actions;
+export const { resetPaymentResult } = invoiceSlice.actions;

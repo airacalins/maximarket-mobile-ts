@@ -2,21 +2,17 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { useAppSelecter } from '../../store/configureStore';
-import colors from '../../styles/colors';
 import { styles } from '../../styles/styles';
 import { dateFormatter } from '../../utils/dateFormatter';
 import Detail from '../../components/item/Detail';
-import AppText from '../../components/text/AppText';
 import LoadingScreen from '../../components/indicator/LoadingScreen';
 
 const StoreDetails = ({ }) => {
     const { tenant, isFetchingTenantDetails } = useAppSelecter((state) => state.tenant)
-
-    const { tenantUniqueId, isActive } = tenant!;
+    const { tenantUniqueId } = tenant!;
     const { slotNumber, size, price, startDate, endDate, } = tenant?.contract!;
 
-    const { badge, bg_light, bg_green, bg_red, container, p_5, p_15, rounded } = styles;
-    const { light } = colors
+    const { bg_light, container, p_15, rounded } = styles;
 
     if (isFetchingTenantDetails) return <LoadingScreen />
 
@@ -29,7 +25,6 @@ const StoreDetails = ({ }) => {
             <Detail title="Contract Start Date" value={dateFormatter(startDate)} />
             <Detail title="Contract End Date" value={dateFormatter(endDate)} />
         </View>
-
     );
 }
 

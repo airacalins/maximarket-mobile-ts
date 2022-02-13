@@ -10,9 +10,10 @@ import NoData from '../../components/indicator/NoData';
 import LoadingScreen from '../../components/indicator/LoadingScreen';
 
 const ModeOfPaymentsScreen = () => {
-    const { bg_light, container, p_10, separator } = styles
-
     const { modeOfPayments, isFetchingModeOfPayments } = useAppSelecter(state => state.modeOfPayment);
+
+    const { container } = styles
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -20,23 +21,19 @@ const ModeOfPaymentsScreen = () => {
     }, [])
 
     if (isFetchingModeOfPayments) return <LoadingScreen />
-
     if (!modeOfPayments) return <NoData />
 
     return (
         <View style={container}>
-            <View style={[bg_light, p_10]}>
 
-                <FlatList
-                    data={modeOfPayments}
-                    keyExtractor={(m) => m.id}
-                    renderItem={({ item }) =>
-                        <ModeOfPaymentItem bankName={item.bankName} accountName={item.accountName} accountNumber={item.accountNumber} />
-                    }
-                    ItemSeparatorComponent={() => <View style={separator} />}
-                />
+            <FlatList
+                data={modeOfPayments}
+                keyExtractor={(m) => m.id}
+                renderItem={({ item }) =>
+                    <ModeOfPaymentItem bankName={item.bankName} accountName={item.accountName} accountNumber={item.accountNumber} />
+                }
+            />
 
-            </View>
         </View>
 
     );

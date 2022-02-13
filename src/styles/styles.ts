@@ -72,6 +72,7 @@ export const styles = StyleSheet.create({
     p_5: { padding: 5 },
     p_10: { padding: 10 },
     p_15: { padding: 15 },
+    p_30: { padding: 30 },
     pb_15: { paddingBottom: 15 },
     px_5: { paddingHorizontal: 5 },
     px_15: { paddingHorizontal: 15 },

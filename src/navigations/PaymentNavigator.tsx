@@ -19,6 +19,7 @@ const PaymentNavigator = () => {
                 name={routes.PAYMENT_DETAILS}
                 component={PaymentDetailsScreen}
             />
+
         </Stack.Navigator>
     );
 }

@@ -17,7 +17,7 @@ interface Props {
 
 const FormTextInput: React.FC<Props> = ({ errorMessage, icon, label, onBlur, onChangeText, placeholder, value }) => {
 
-    const { bg_light, center_x, me_5, my_5, p_5, px_5, row_center_x, w_25 } = styles
+    const { bg_light, center_x, my_5, p_5, px_5, row_center_x, w_25 } = styles
     const { darkGrey, red } = colors
 
     return (

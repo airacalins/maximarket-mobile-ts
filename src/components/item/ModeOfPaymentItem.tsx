@@ -12,11 +12,11 @@ interface Props {
 }
 
 const ModeOfPaymentItem: React.FC<Props> = ({ bankName, accountName, accountNumber }) => {
-  const { bg_light, container, row_center_x, p_10 } = styles
+  const { bg_light, container, row_center_x, my_10, p_15, rounded } = styles
   const { darkGrey } = colors
 
   return (
-    <View style={[bg_light, p_10]}>
+    <View style={[bg_light, my_10, p_15, rounded]}>
       <View style={row_center_x}>
         <AppText as="h4" bold color={darkGrey}>Bank Name: </AppText>
         <AppText as="h4">{bankName}</AppText>

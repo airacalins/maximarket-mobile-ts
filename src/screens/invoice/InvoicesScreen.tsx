@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
+import routes from '../../navigations/routes';
 import { FlatList, TouchableOpacity, View } from 'react-native';
-import colors from '../../styles/colors';
-import { styles } from '../../styles/styles';
-import AppText from '../../components/text/AppText';
+
 import { useAppDispatch, useAppSelecter } from '../../store/configureStore';
 import { fetchInvoiceDetailsAsync, fetchInvoicesAsync } from '../../reducers/invoiceSlice';
+import colors from '../../styles/colors';
+import { styles } from '../../styles/styles';
+import { dateFormatter } from '../../utils/dateFormatter';
+import AppText from '../../components/text/AppText';
+import InvoiceBadge from '../../components/badge/InvoiceBadge';
 import LoadingScreen from '../../components/indicator/LoadingScreen';
 import NoData from '../../components/indicator/NoData';
-import { dateFormatter } from '../../utils/dateFormatter';
-import routes from '../../navigations/routes';
-import InvoiceBadge from '../../components/badge/InvoiceBadge';
 
 interface Props {
     navigation: any

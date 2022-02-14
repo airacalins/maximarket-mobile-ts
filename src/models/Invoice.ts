@@ -32,7 +32,7 @@ export interface ICreatePaymentInput {
 
 export interface IPaymentResult {
     amount: number
-    dateCreated: Date
+    dateCreated: string
     referenceNumber: string
 }
 

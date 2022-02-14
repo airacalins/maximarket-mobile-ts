@@ -7,6 +7,7 @@ import CreatePaymentNavigator from './CreatePaymentNavigator';
 import InvoiceDetailsScreen from '../screens/invoice/InvoiceDetailsScreen';
 import PaymentFormScreen from '../screens/payment/PaymentFormScreen';
 import PaymentFormNavigator from './PaymentFormNavigator';
+import PaymentDetailsScreen from '../screens/payment/PaymentDetailsScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -24,6 +25,14 @@ const InvoiceNavigator = () => {
                 component={InvoiceDetailsScreen}
                 options={{
                     title: "Invoice"
+                }}
+            />
+
+            <Stack.Screen
+                name={routes.PAYMENT_DETAILS}
+                component={PaymentDetailsScreen}
+                options={{
+                    title: "Payment Details"
                 }}
             />
 

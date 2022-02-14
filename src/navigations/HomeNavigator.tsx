@@ -29,11 +29,6 @@ const HomeNavigator = () => (
             options={{ headerShown: false }}
         />
 
-        <Stack.Screen
-            name="PaymentsNavigator"
-            component={PaymentNavigator}
-            options={{ headerShown: false }}
-        />
     </Stack.Navigator>
 );
 

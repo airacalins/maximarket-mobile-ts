@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import agent from "../api/agent";
 import { ICreatePaymentInput, IInvoice, IPaymentResult } from "../models/Invoice";
+import { IPayment } from "../models/Payment";
 
 export interface IInvoiceState {
   invoices: IInvoice[];
@@ -9,7 +10,8 @@ export interface IInvoiceState {
   isFetchingInvoiceDetails: boolean;
   isSaving: boolean;
   isError: boolean;
-  paymentResult?: IPaymentResult
+  paymentResult?: IPaymentResult;
+  selectedPayment?: IPayment;
 }
 
 const initialState: IInvoiceState = {
@@ -20,6 +22,7 @@ const initialState: IInvoiceState = {
   isSaving: false,
   isError: false,
   paymentResult: undefined,
+  selectedPayment: undefined
 }
 
 export const createPaymentAsync = createAsyncThunk<IPaymentResult, ICreatePaymentInput>(
@@ -67,6 +70,9 @@ export const invoiceSlice = createSlice({
     resetPaymentResult(state) {
       state.paymentResult = undefined;
     },
+    setSelectedPayment (state, action) {
+      state.selectedPayment = action.payload;
+    },
   },
 
 
@@ -76,11 +82,18 @@ export const invoiceSlice = createSlice({
       state.isSaving = true;
     });
     builder.addCase(createPaymentAsync.fulfilled, (state, action) => {
-      state.paymentResult = action.payload
+      state.paymentResult = (action.payload as any).data
       state.isSaving = false;
     });
     builder.addCase(createPaymentAsync.rejected, (state, action) => {
         state.isSaving = false;
+        console.log(action.payload)
+        state.paymentResult = {
+          amount: 10,
+          dateCreated: '',
+          referenceNumber: ''
+
+        }
     });
 
     builder.addCase(fetchInvoicesAsync.pending, (state, action) => {
@@ -114,4 +127,4 @@ export const invoiceSlice = createSlice({
   })
 })
 
-export const { resetPaymentResult } = invoiceSlice.actions;
+export const { resetPaymentResult, setSelectedPayment } = invoiceSlice.actions;

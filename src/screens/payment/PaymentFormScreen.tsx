@@ -23,7 +23,7 @@ interface Props {
 const PaymentFormScreen: React.FC<Props> = ({ navigation }) => {
     const dispatch = useAppDispatch()
     const { tenant } = useAppSelecter((state) => state.tenant)
-    const { invoice, isFetchingInvoiceDetails } = useAppSelecter((state) => state.invoice)
+    const { invoice, isFetchingInvoiceDetails, isSaving } = useAppSelecter((state) => state.invoice)
     const { modeOfPayments, isFetchingModeOfPayments } = useAppSelecter(state => state.modeOfPayment);
 
     const [modeOfPaymentId, setModeOfPaymentId] = useState("")
@@ -41,11 +41,13 @@ const PaymentFormScreen: React.FC<Props> = ({ navigation }) => {
     const { darkGrey, primary } = colors
 
     useEffect(() => {
-        dispatch(fetchModeOfPaymentsAsync())
-
-        return () => {
-            dispatch(resetPaymentResult())
+        if (modeOfPayments.length > 0) {
+            setModeOfPaymentId(modeOfPayments[0].id)
         }
+    }, [modeOfPayments])
+
+    useEffect(() => {
+        dispatch(fetchModeOfPaymentsAsync())
     }, [])
 
     useEffect(() => {
@@ -57,7 +59,6 @@ const PaymentFormScreen: React.FC<Props> = ({ navigation }) => {
             base64: true,
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            // aspect: [4, 3],
             quality: 1,
         });
 
@@ -68,19 +69,19 @@ const PaymentFormScreen: React.FC<Props> = ({ navigation }) => {
     };
 
     const onSubmit = async () => {
-        if (!!setModeOfPaymentId && !!amount && !!image) {
-            navigation.navigate(routes.PAYMENT_DETAILS)
+        if (!!setModeOfPaymentId && !!amount && !!image && !isNaN(+amount)) {
             await dispatch(createPaymentAsync({
                 invoiceId: invoice?.id!,
                 modeOfPaymentId,
                 amount,
                 file: imageData!
             }));
-            await dispatch(fetchInvoicesAsync(tenant?.tenantUniqueId!))
-            await dispatch(fetchInvoiceDetailsAsync(tenant?.tenantUniqueId!))
+            dispatch(fetchInvoicesAsync(tenant?.tenantUniqueId!))
+            dispatch(fetchInvoiceDetailsAsync(invoice?.id!))
+            navigation.navigate(routes.PAYMENT_RECEIPT)
         }
     }
-    if (isFetchingInvoiceDetails || !invoice || isFetchingModeOfPayments) return <LoadingScreen />
+    if (isFetchingInvoiceDetails || !invoice || isFetchingModeOfPayments || isSaving) return <LoadingScreen />
     const { invoiceNumber } = invoice
 
     return (
@@ -124,6 +125,7 @@ const PaymentFormScreen: React.FC<Props> = ({ navigation }) => {
                                 placeholder='Amount'
                                 errorMessage={touched && errors.amount}
                                 value={amount}
+                                isNuneric={true}
                             />
 
                             <View style={my_5}>

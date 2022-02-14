@@ -5,11 +5,15 @@ import { FontAwesome } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 import { styles } from '../../styles/styles';
 import AppText from '../../components/text/AppText';
-import { useAppSelecter } from '../../store/configureStore';
+import { useAppDispatch, useAppSelecter } from '../../store/configureStore';
 
 const PaymentsScreen = () => {
     const { bg_light, container, me_5, my_5, p_15, row, row_center_x, row_center_x_between, rounded, w_30 } = styles;
     const { darkGrey, green, red, secondary, yellow } = colors;
+
+    const dispatch = useAppDispatch()
+    const { invoices, isFetchingInvoices } = useAppSelecter((state) => state.invoice)
+
 
     const { tenant } = useAppSelecter((state) => state.tenant)
 
@@ -37,12 +41,3 @@ const PaymentsScreen = () => {
 
 export default PaymentsScreen;
 
-// "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-// "status": 0,
-// "bankName": "string",
-// "accountName": "string",
-// "accountNumber": "string",
-// "dateCreated": "2022-02-12T22:40:23.112Z",
-// "amount": 0,
-// "referenceNumber": "string",
-// "imageUrl": "string"

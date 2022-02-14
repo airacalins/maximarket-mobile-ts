@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import routes from './routes';
 
 import PaymentFormScreen from '../screens/payment/PaymentFormScreen';
-import PaymentDetailsScreen from '../screens/payment/PaymentDetailsScreen';
+import PaymentReceiptScreen from '../screens/payment/PaymentReceiptScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,8 +19,12 @@ const PaymentFormNavigator = () => {
             />
 
             <Stack.Screen
-                name={routes.PAYMENT_DETAILS}
-                component={PaymentDetailsScreen}
+                name={routes.PAYMENT_RECEIPT}
+                component={PaymentReceiptScreen}
+                options={{
+                    headerShown: false,
+                    title: "Payment Receipt"
+                }}
             />
 
         </Stack.Navigator>

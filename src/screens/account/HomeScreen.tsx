@@ -71,15 +71,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
             <View style={[bg_light, rounded, mb_10]}>
                 <AppMenu
-                    title='Payments'
-                    subtitle='View payment histories'
-                    icon={<MaterialCommunityIcons name="contactless-payment-circle" size={28} color={light} />}
-                    onPress={() => navigation.navigate("PaymentsNavigator")}
-                />
-            </View>
-
-            <View style={[bg_light, rounded, mb_10]}>
-                <AppMenu
                     title='Invoices'
                     subtitle='View recent invoices'
                     icon={<FontAwesome name="file-text-o" size={22} color={light} />}

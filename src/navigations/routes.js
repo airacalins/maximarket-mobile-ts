@@ -13,6 +13,7 @@ export default Object.freeze({
     PAYMENT_DETAILS: 'PaymentDetails',
     PAYMENT_FORM: 'PaymentForm',
     PAYMENT_RECEIPT: 'PaymentReceipt',
+    PAYMENT_SUCCESS: 'PaymentSuccess',
     SLOTS: "Slots",
     SLOT_DETAILS: 'SlotDetails',
     SLOT_LOCATOR: ' SlotLocator',

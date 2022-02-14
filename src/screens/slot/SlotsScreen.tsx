@@ -57,13 +57,13 @@ const SlotsScreen: React.FC<Props> = ({ navigation }) => {
                     <AppText as="h4" bold color={darkGrey}>Available Slots</AppText>
                 </View>
 
-                <View>
+                <View style={[bg_light, mx_15, my_5, p_15, rounded, row_center_x_between]}>
                     <FlatList
                         data={availableSlots}
                         keyExtractor={(a) => a.id}
                         renderItem={({ item }) =>
                             <TouchableOpacity onPress={() => handleSlotDetails(item.id)}>
-                                <View style={[bg_light, mx_15, my_5, p_15, rounded, row_center_x_between]}>
+                                <View style={[my_5, p_15, row_center_x_between]}>
                                     <AppText as="h4" bold color={primary}>{item.slotNumber}</AppText>
                                     <AppText as="h4" bold color={primary}>{item.price}</AppText>
                                 </View>

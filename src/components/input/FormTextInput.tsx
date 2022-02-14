@@ -13,9 +13,10 @@ interface Props {
     onChangeText: any,
     placeholder: string,
     value?: string,
+    isNuneric?: boolean
 }
 
-const FormTextInput: React.FC<Props> = ({ errorMessage, icon, label, onBlur, onChangeText, placeholder, value }) => {
+const FormTextInput: React.FC<Props> = ({ errorMessage, icon, label, onBlur, onChangeText, placeholder, value, isNuneric }) => {
 
     const { bg_light, center_x, my_5, p_5, px_5, row_center_x, w_25, w_100p } = styles
     const { darkGrey, red } = colors
@@ -35,6 +36,7 @@ const FormTextInput: React.FC<Props> = ({ errorMessage, icon, label, onBlur, onC
                     placeholder={placeholder}
                     style={w_100p}
                     value={value}
+                    keyboardType={isNuneric ? "numeric" : undefined}
                 />
             </View>
 

@@ -22,9 +22,9 @@ interface Props {
 
 const PaymentFormScreen: React.FC<Props> = ({ navigation }) => {
     const dispatch = useAppDispatch()
-    const { tenant } = useAppSelecter((state) => state.tenant)
-    const { invoice, isFetchingInvoiceDetails, isSaving } = useAppSelecter((state) => state.invoice)
-    const { modeOfPayments, isFetchingModeOfPayments } = useAppSelecter(state => state.modeOfPayment);
+    const { tenant } = useAppSelecter((state: any) => state.tenant)
+    const { invoice, isFetchingInvoiceDetails, isSaving } = useAppSelecter((state:any) => state.invoice)
+    const { modeOfPayments, isFetchingModeOfPayments } = useAppSelecter((state:any) => state.modeOfPayment);
 
     const [modeOfPaymentId, setModeOfPaymentId] = useState("")
     const [amount, setAmount] = useState("")
@@ -74,7 +74,8 @@ const PaymentFormScreen: React.FC<Props> = ({ navigation }) => {
                 invoiceId: invoice?.id!,
                 modeOfPaymentId,
                 amount,
-                file: imageData!
+                file: imageData!,
+                imageUri: image
             }));
             dispatch(fetchInvoicesAsync(tenant?.tenantUniqueId!))
             dispatch(fetchInvoiceDetailsAsync(invoice?.id!))
@@ -106,7 +107,7 @@ const PaymentFormScreen: React.FC<Props> = ({ navigation }) => {
                                 <View style={[bg_light, my_5, p_5]} >
                                     <RNPickerSelect
                                         onValueChange={(value) => setModeOfPaymentId(value)}
-                                        items={modeOfPayments.map(i => {
+                                        items={modeOfPayments.map((i:any) => {
                                             return { label: i.bankName, value: i.id || undefined }
                                         })}
                                         placeholder={{}}

@@ -25,7 +25,6 @@ const PaymentReceiptScreen = ({ }) => {
 
     return (
         <View style={[bg_light, container_full, flex_1, p_15, rounded]}>
-            <Detail title='Date' value={"test"} />
             <Detail title='Date' value={!!paymentResult && dateFormatter(paymentResult?.dateCreated)} />
             <Detail title='Amount' value={paymentResult?.amount} />
             <Detail title='Reference Number' value={paymentResult?.referenceNumber} />

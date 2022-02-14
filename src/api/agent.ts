@@ -55,7 +55,18 @@ const Announcement = {
 
 const Invoice = {
   list: (id: string) => request.get(`invoices/get-tenant-invoice-by-account-number/${id}`),
-  create: (values: any) => request.fileUpload('invoices/payment/', values),
+  create: (values: any) => fetch('https://fast-badlands-66183.herokuapp.com/api/invoices/payment/', {
+    method: 'POST',
+    body: values,
+    // headers: {
+    //   'content-type': 'multipart/form-data',
+    // },
+  }).then((response) => 
+    response.json().then(function(data) {
+      return data;
+    })),
+  
+  // request.fileUpload('invoices/payment/', values),
   details: (id: string) => request.get(`invoices/${id}`),
 }
 

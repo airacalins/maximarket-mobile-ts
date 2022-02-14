@@ -27,7 +27,8 @@ export interface ICreatePaymentInput {
     invoiceId: string,
     modeOfPaymentId: string,
     amount: string,
-    file: string
+    file: string,
+    imageUri: string
 }
 
 export interface IPaymentResult {

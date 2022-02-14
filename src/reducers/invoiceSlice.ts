@@ -31,7 +31,8 @@ export const createPaymentAsync = createAsyncThunk<IPaymentResult, ICreatePaymen
     try {
       const bodyFormData = new FormData();
       bodyFormData.append('invoiceId', payment.invoiceId);
-      bodyFormData.append('file', payment.file);
+      // bodyFormData.append('file', payment.file);
+      bodyFormData.append('file', { uri: payment?.imageUri, name: 'payment.jpeg', type: 'image/jpeg' } as any)
       bodyFormData.append('modeOfPaymentId', payment.modeOfPaymentId);
       bodyFormData.append('amount', `${payment.amount}`);
       return await agent.Invoice.create(bodyFormData) as any;
@@ -82,7 +83,7 @@ export const invoiceSlice = createSlice({
       state.isSaving = true;
     });
     builder.addCase(createPaymentAsync.fulfilled, (state, action) => {
-      state.paymentResult = (action.payload as any).data
+      state.paymentResult = action.payload;
       state.isSaving = false;
     });
     builder.addCase(createPaymentAsync.rejected, (state, action) => {

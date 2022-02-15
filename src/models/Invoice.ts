@@ -15,6 +15,7 @@ export interface IInvoice {
     phone: string,
     slotNumber: string,
     tenantId: string,
+    balance: number;
 }
   
 export interface IInvoiceItem {

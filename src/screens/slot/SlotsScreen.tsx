@@ -35,7 +35,7 @@ const SlotsScreen: React.FC<Props> = ({ navigation }) => {
         navigation.navigate(routes.SLOT_DETAILS)
     }
 
-    const { bg_light, bg_dark, container, flex_1, mb_25, mx_15, my_5, p_5, p_15, px_15, rounded, row_center_x_between } = styles
+    const { bg_light, bg_dark, container, my_5, p_5, p_15, rounded, row_center_x_between } = styles
     const { darkGrey, primary, secondary } = colors
 
     if (isFetchingSlots) return <LoadingScreen />

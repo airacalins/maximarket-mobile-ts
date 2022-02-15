@@ -4,6 +4,7 @@ import routes from './routes';
 
 import PaymentFormScreen from '../screens/payment/PaymentFormScreen';
 import PaymentReceiptScreen from '../screens/payment/PaymentReceiptScreen';
+import PaymentConfirmationNavigator from './PaymentConfirmationNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,8 +20,8 @@ const PaymentFormNavigator = () => {
             />
 
             <Stack.Screen
-                name={routes.PAYMENT_RECEIPT}
-                component={PaymentReceiptScreen}
+                name={"PaymentConfirmationNavigator"}
+                component={PaymentConfirmationNavigator}
                 options={{
                     headerShown: false,
                     title: "Payment Receipt"

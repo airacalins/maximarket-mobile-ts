@@ -9,8 +9,8 @@ interface Props {
 }
 
 const InvoiceBadge: React.FC<Props> = ({ status }) => {
-    const { badge, bg_red, bg_yellow } = styles;
-    const { blue, green, light } = colors;
+    const { badge, bg_blue, bg_green, bg_red, bg_yellow } = styles;
+    const { light } = colors;
 
     if (status === 0) return (
         <View style={[badge, bg_red]}>
@@ -25,14 +25,14 @@ const InvoiceBadge: React.FC<Props> = ({ status }) => {
     )
 
     if (status === 2) return (
-        <View style={[badge, bg_yellow]}>
-            <AppText as="h5" color={blue}>Partially Paid</AppText>
+        <View style={[badge, bg_blue]}>
+            <AppText as="h5" color={light}>Partially Paid</AppText>
         </View>
     )
 
     return (
-        <View style={[badge, bg_yellow]}>
-            <AppText as="h5" color={green}>Paid</AppText>
+        <View style={[badge, bg_green]}>
+            <AppText as="h5" color={light}>Paid</AppText>
         </View>
     )
 }

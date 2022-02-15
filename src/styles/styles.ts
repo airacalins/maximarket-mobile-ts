@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import Constants from 'expo-constants';
 import colors from "./colors";
 
-const { dark, green, light, primary, red, secondary, yellow } = colors
+const { blue, dark, green, light, primary, red, secondary, yellow } = colors
 
 export const styles = StyleSheet.create({
 
@@ -10,7 +10,8 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 5,
         borderRadius: 5,
     },
-
+    
+    bg_blue: { backgroundColor: blue },
     bg_dark: { backgroundColor: dark },
     bg_darken: { backgroundColor: "rgba(0,0,0,0.5)" },
     bg_green: { backgroundColor: green },

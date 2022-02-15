@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import InvoiceBadge from '../../components/badge/InvoiceBadge';
 import Detail from '../../components/item/Detail';
 import routes from '../../navigations/routes';
 import { useAppSelecter } from '../../store/configureStore';
@@ -18,7 +19,7 @@ const PaymentDetailsScreen: React.FC<Props> = ({ }) => {
     return (
         <View style={[bg_light, container, m_15, p_15, rounded]}>
             <Detail title='Reference Number' value={referenceNumber} />
-            <Detail title='Status' value={status} />
+            <Detail title='Status' value={InvoiceBadge(status)} />
             <Detail title='Date' value={dateFormatter(dateCreated)} />
             <Detail title='Bank Name' value={bankName} />
             <Detail title='Account Name' value={accountName} />

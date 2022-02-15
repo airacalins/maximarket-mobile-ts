@@ -29,32 +29,32 @@ const StoreDetails = ({ }) => {
 
     return (
         <View style={[bg_light, container, p_15, rounded]}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <Detail title="Account Number" value={tenantUniqueId} />
-                <Detail title="Slot Number" value={slotNumber} />
-                <Detail title="Size" value={`${size} sqm.`} />
-                <Detail title="Rental Fee" value={price} />
-                <Detail title="Contract Start Date" value={dateFormatter(startDate)} />
-                <Detail title="Contract End Date" value={dateFormatter(endDate)} />
-                <View style={my_5}>
-                    <AppText as="h5" bold color={darkGrey}>Contact Photos</AppText>
-                    <FlatList
-                        data={contractPhotos}
-                        keyExtractor={(c => c.id)}
-                        renderItem={({ item }) =>
-                            <>
-                                <Image
-                                    source={{ uri: item.url }}
-                                    resizeMode='contain'
-                                    style={{ aspectRatio: 1, width: '100%', height: undefined, borderColor: darkGrey, borderRadius: 10, }}
-                                />
-                            </>
-                        }
-                    />
-                </View>
-            </ScrollView>
+            <FlatList
+                ListHeaderComponent={
+                    <>
+                        <Detail title="Account Number" value={tenantUniqueId} />
+                        <Detail title="Slot Number" value={slotNumber} />
+                        <Detail title="Size" value={`${size} sqm.`} />
+                        <Detail title="Rental Fee" value={price} />
+                        <Detail title="Contract Start Date" value={dateFormatter(startDate)} />
+                        <Detail title="Contract End Date" value={dateFormatter(endDate)} />
+                        <AppText as="h5" bold color={darkGrey}>Contact Photos</AppText>
+                    </>
+                }
+                showsVerticalScrollIndicator={false}
+                data={contractPhotos}
+                keyExtractor={(c => c.id)}
+                renderItem={({ item }) =>
+                    <>
+                        <Image
+                            source={{ uri: item.url }}
+                            resizeMode='contain'
+                            style={{ aspectRatio: 1, width: '100%', height: undefined, borderColor: darkGrey, borderRadius: 10, }}
+                        />
+                    </>
+                }
+            />
         </View>
-
     );
 }
 

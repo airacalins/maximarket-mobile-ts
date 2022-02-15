@@ -20,6 +20,7 @@ const PaymentNavigator = () => {
                 component={PaymentDetailsScreen}
             />
 
+
         </Stack.Navigator>
     );
 }

@@ -9,6 +9,7 @@ import routes from '../../navigations/routes';
 import { useAppDispatch, useAppSelecter } from '../../store/configureStore';
 import colors from '../../styles/colors';
 import { styles } from '../../styles/styles';
+import { currencyFormatter } from '../../utils/currencyFormatter';
 
 interface Props {
     navigation: any
@@ -34,7 +35,7 @@ const SlotDetailsScreen: React.FC<Props> = ({ navigation }) => {
             <View style={[bg_light, container, p_15, rounded]}>
                 <Detail title="Slot Number" value={slotNumber} />
                 <Detail title="Size" value={`${size} sqm.`} />
-                <Detail title="Rental Fee" value={price} />
+                <Detail title="Rental Fee" value={currencyFormatter(price)} />
 
                 <AppButton onPress={() => navigation.navigate(routes.CONTACTS)} title="Contact us to reserve" />
 

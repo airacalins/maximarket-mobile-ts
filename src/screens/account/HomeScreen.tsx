@@ -10,6 +10,7 @@ import { styles } from '../../styles/styles';
 import AppText from '../../components/text/AppText';
 import AppMenu from '../../components/menu/AppMenu';
 import { dateFormatter } from '../../utils/dateFormatter';
+import { currencyFormatter } from '../../utils/currencyFormatter';
 
 interface Props {
     navigation: any
@@ -21,7 +22,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const { firstName, tenantUniqueId, contract } = tenant!;
     const { slotNumber, nextBillingDate } = contract!;
 
-    const { bg_dark, bg_light, bg_secondary, center_x, container_full, icon_circle_xs, mb_10, me_8, my_5, my_15, pb_15, px_15, py_25, rounded, row, row_center_x, row_center_x_between, w_50p } = styles;
+    const { bg_dark, bg_light, bg_secondary, center_x, container_full, icon_circle_xs, mb_10, me_8, my_5, my_15, pb_15, px_15, py_25, rounded, row, row_center_x, row_center_x_between, row_center_y, w_50p } = styles;
     const { darkGrey, light } = colors;
 
     return (
@@ -39,9 +40,9 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             </View>
 
             <View style={[bg_dark, px_15, py_25, rounded, my_15]}>
-                <View style={[pb_15, center_x]}>
+                <View style={[pb_15, row_center_y]}>
                     <AppText as="h5" color={light}>Total Balance</AppText>
-                    <AppText as="h3" bold color={light}>PHP 4,000</AppText>
+                    <AppText as="h3" bold color={light}>input</AppText>
                 </View>
 
                 <View style={row}>

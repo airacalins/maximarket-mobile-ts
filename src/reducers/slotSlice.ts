@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import agent from "../api/agent";
 import { ISlot } from "../models/Slot";
 
-
 export interface ISlotState {
   slots: ISlot[];
   slot?: ISlot;

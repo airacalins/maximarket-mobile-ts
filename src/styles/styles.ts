@@ -65,6 +65,7 @@ export const styles = StyleSheet.create({
     me_8: { marginRight: 8 },
     me_10: { marginRight: 10 },
     mt_15: {marginTop: 15},
+    mt_30: {marginTop: 30},
     mx_15: {marginHorizontal: 15},
     my_5: { marginVertical: 5 },
     my_10: { marginVertical: 10 },

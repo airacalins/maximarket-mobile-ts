@@ -37,6 +37,13 @@ export interface IPaymentResult {
     referenceNumber: string
 }
 
+export enum PaymentStatus {
+    Unpaid,
+    Pending,
+    Approved,
+    Declined
+  }
+
 export enum InvoiceStatus {
     Unpaid,
     Pending,

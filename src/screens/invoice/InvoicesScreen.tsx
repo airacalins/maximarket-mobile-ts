@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import routes from '../../navigations/routes';
-import { FlatList, TouchableOpacity, View } from 'react-native';
+import { FlatList, RefreshControl, TouchableOpacity, View } from 'react-native';
 
 import { useAppDispatch, useAppSelecter } from '../../store/configureStore';
 import { fetchInvoiceDetailsAsync, fetchInvoicesAsync } from '../../reducers/invoiceSlice';
@@ -11,6 +11,7 @@ import AppText from '../../components/text/AppText';
 import InvoiceBadge from '../../components/badge/InvoiceBadge';
 import LoadingScreen from '../../components/indicator/LoadingScreen';
 import NoData from '../../components/indicator/NoData';
+import { currencyFormatter } from '../../utils/currencyFormatter';
 
 interface Props {
     navigation: any
@@ -30,7 +31,7 @@ const InvoicesScreen: React.FC<Props> = ({ navigation }) => {
     }, [])
 
     const { bg_light, container, me_5, my_5, p_15, row_center_x, row_center_x_between, rounded } = styles;
-    const { darkGrey, secondary } = colors;
+    const { darkGrey, primary, secondary } = colors;
 
     const handleInvoiceDetails = async (id: string) => {
         navigation.navigate(routes.INVOICE_DETAILS)
@@ -43,6 +44,12 @@ const InvoicesScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <View style={container}>
             <FlatList
+                refreshControl={
+                    <RefreshControl
+                        colors={[secondary, primary]}
+                        refreshing={isFetchingInvoices}
+                        onRefresh={() => dispatch(fetchInvoicesAsync(tenant?.tenantUniqueId!))} />
+                }
                 data={invoices}
                 keyExtractor={(i) => i.id}
                 renderItem={({ item }) =>
@@ -53,7 +60,6 @@ const InvoicesScreen: React.FC<Props> = ({ navigation }) => {
                                 <View style={me_5}>
                                     <AppText as="h5" bold color={darkGrey}>{dateFormatter(item.dateCreated)}</AppText>
                                 </View>
-
                                 <InvoiceBadge status={item.invoiceStatus} />
                             </View>
 
@@ -62,7 +68,7 @@ const InvoicesScreen: React.FC<Props> = ({ navigation }) => {
                                     <AppText bold>{item.invoiceNumber}</AppText>
                                 </View>
 
-                                <AppText as="h3" bold color={secondary}>{item.amount}</AppText>
+                                <AppText as="h3" bold color={secondary}>{currencyFormatter(item.amount)}</AppText>
                             </View>
                         </View>
                     </TouchableOpacity>

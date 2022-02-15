@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import LoadingScreen from '../../components/indicator/LoadingScreen';
-import AppText from '../../components/text/AppText';
-import { ISlot } from '../../models/Slot';
-import routes from '../../navigations/routes';
+import { FlatList, Image, RefreshControl, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+
 import { fetchSlotDetailsAsync, fetchSlotsAsync } from '../../reducers/slotSlice';
 import { useAppDispatch, useAppSelecter } from '../../store/configureStore';
+import { ISlot } from '../../models/Slot';
 import colors from '../../styles/colors';
+import routes from '../../navigations/routes';
 import { styles } from '../../styles/styles';
+import AppText from '../../components/text/AppText';
+import LoadingScreen from '../../components/indicator/LoadingScreen';
 
 interface Props {
     navigation: any
@@ -34,7 +35,7 @@ const SlotsScreen: React.FC<Props> = ({ navigation }) => {
     }
 
     const { bg_light, bg_dark, container, flex_1, mb_25, mx_15, my_5, p_5, p_15, px_15, rounded, row_center_x_between } = styles
-    const { darkGrey, primary } = colors
+    const { darkGrey, primary, secondary } = colors
 
     if (isFetchingSlots) return <LoadingScreen />
 
@@ -61,6 +62,12 @@ const SlotsScreen: React.FC<Props> = ({ navigation }) => {
                         </View>
                     }
                     showsVerticalScrollIndicator={false}
+                    refreshControl={
+                        <RefreshControl
+                            colors={[secondary, primary]}
+                            refreshing={isFetchingSlots}
+                            onRefresh={() => dispatch(fetchSlotsAsync())} />
+                    }
                     data={availableSlots}
                     keyExtractor={(a) => a.id}
                     renderItem={({ item }) =>

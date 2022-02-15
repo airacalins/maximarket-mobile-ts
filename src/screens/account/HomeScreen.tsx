@@ -63,7 +63,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                         </View>
 
                         <View>
-                            <AppText as="h5" color={light}>Nexy Billing Date</AppText>
+                            <AppText as="h5" color={light}>Next Billing Date</AppText>
                             <AppText as="h5" bold color={light}>{dateFormatter(nextBillingDate)}</AppText>
                         </View>
                     </View>

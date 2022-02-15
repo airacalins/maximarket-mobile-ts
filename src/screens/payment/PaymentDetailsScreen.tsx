@@ -20,7 +20,7 @@ const PaymentDetailsScreen: React.FC<Props> = ({ }) => {
     const { light } = colors
 
     const renderPaymentStatusBadge = (status: number) => {
-        if (status == 0 || 1) {
+        if (status == 0 || status == 1) {
             return (
                 <View style={[bg_yellow, px_5, rounded]}>
                     <AppText as='h5' color={light}>Pending</AppText>
@@ -45,7 +45,6 @@ const PaymentDetailsScreen: React.FC<Props> = ({ }) => {
         <View style={[bg_light, container, m_15, p_15, rounded]}>
             <Detail title='Reference Number' value={referenceNumber} />
             <Detail title='Status' value={renderPaymentStatusBadge(status)} />
-            <Detail title='Status' value={status} />
             <Detail title='Date' value={dateFormatter(dateCreated)} />
             <Detail title='Bank Name' value={bankName} />
             <Detail title='Account Name' value={accountName} />

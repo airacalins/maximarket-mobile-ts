@@ -35,7 +35,7 @@ const SlotDetailsScreen: React.FC<Props> = ({ navigation }) => {
             <View style={[bg_light, container, p_15, rounded]}>
                 <Detail title="Slot Number" value={slotNumber} />
                 <Detail title="Size" value={`${size} sqm.`} />
-                <Detail title="Rental Fee" value={currencyFormatter(price)} />
+                <Detail title="Rental Fee" value={currencyFormatter(price!)} />
 
                 <AppButton onPress={() => navigation.navigate(routes.CONTACTS)} title="Contact us to reserve" />
 

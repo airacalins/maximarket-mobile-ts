@@ -3,10 +3,11 @@ import { FlatList, Image, RefreshControl, ScrollView, Text, TouchableOpacity, Vi
 
 import { fetchSlotDetailsAsync, fetchSlotsAsync } from '../../reducers/slotSlice';
 import { useAppDispatch, useAppSelecter } from '../../store/configureStore';
-import { ISlot } from '../../models/Slot';
+import { currencyFormatter } from '../../utils/currencyFormatter';
 import colors from '../../styles/colors';
 import routes from '../../navigations/routes';
 import { styles } from '../../styles/styles';
+import { ISlot } from '../../models/Slot';
 import AppText from '../../components/text/AppText';
 import LoadingScreen from '../../components/indicator/LoadingScreen';
 
@@ -74,7 +75,7 @@ const SlotsScreen: React.FC<Props> = ({ navigation }) => {
                         <TouchableOpacity onPress={() => handleSlotDetails(item.id)}>
                             <View style={[my_5, p_5, row_center_x_between]}>
                                 <AppText as="h4" bold color={primary}>{item.slotNumber}</AppText>
-                                <AppText as="h4" bold color={primary}>{item.price}</AppText>
+                                <AppText as="h4" bold color={primary}>{currencyFormatter(item.price!)}</AppText>
                             </View>
                         </TouchableOpacity>
                     }

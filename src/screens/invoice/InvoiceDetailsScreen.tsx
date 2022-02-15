@@ -36,7 +36,7 @@ const InvoiceDetailsScreen: React.FC<Props> = ({ navigation }) => {
 
     const totalAmountPaid = useMemo(
         () => !!invoice && !!invoice.payments ?
-            invoice.payments.reduce((previousValue, currentValue) =>
+            invoice.payments.filter(i => i.status == 2).reduce((previousValue, currentValue) =>
                 previousValue + currentValue.amount, 0) : 0,
         [invoice]
     );
